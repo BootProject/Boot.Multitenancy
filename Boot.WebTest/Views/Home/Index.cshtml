@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>@Model.ResultFromFirstDb</h1>
+    <p class="lead">Now, take a look in App_Data folder to see the created databases. Text above i generated from database FirstDB.</p>
+    <p><a href="http://www.bitbucket.org/rickardmagnusson/boot.multitenancy" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        Here should a call from second db be written:<b> @Model.ResultFromSecondDb </b>
+    </div>
+</div>
