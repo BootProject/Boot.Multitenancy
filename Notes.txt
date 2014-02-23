@@ -1,0 +1,14 @@
+Multitenancy
+
+Package Boot.MultiTenancy 
+
+This package is an extension of nHibernate's ISessionFactory and 
+makes it incredible easy to use multiple session within the same 
+application. In BootCms it is used to define different domains 
+and their databases.
+
+The setup is really easy, but you can of course customize it in 
+any way you like. The SessionFactoryContainer want just a Key 
+and a ISessionFactory, typically an Fluent or nHibenate config.
+
+

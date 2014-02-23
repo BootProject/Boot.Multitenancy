@@ -4,7 +4,7 @@ using NHibernate;
 namespace Boot.Multitenancy
 {
     /// <summary>
-    /// Interface implemented for ISessionFactory
+    /// Interface ISessionFactoryCreator
     /// </summary>
     public interface ISessionFactoryCreator
     {
