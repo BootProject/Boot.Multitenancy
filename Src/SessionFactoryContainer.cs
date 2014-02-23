@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Boot.Multitenancy.Extensions;
+using FluentNHibernate.Conventions;
 using NHibernate;
 
 namespace Boot.Multitenancy
@@ -76,11 +77,13 @@ namespace Boot.Multitenancy
         {
             lock (Lock)
             {
-                if (!Current.SessionFactories.ContainsKey(key))
+                if (Current.SessionFactories.ContainsKey(key).IsNotAny())
                     Current.SessionFactories.Add(key, sessionFactory);
                 return Current;
             }
         }
+
+
 
         /// <summary>
         /// Instantiate a new Dictionary object.
