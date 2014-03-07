@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Boot.Multitenancy.Configuration
 {
+    /// <summary>
+    /// DatabaseCollection
+    /// TODO: Make generic.
+    /// </summary>
     public class DatabaseCollection : ConfigurationElementCollection
     {
         public DatabaseCollection()

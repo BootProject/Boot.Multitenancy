@@ -8,10 +8,24 @@ using System.Web;
 
 namespace Boot.Multitenancy.Configuration
 {
+
+    /// <summary>
+    /// DatabaseCollectionReader
+    /// </summary>
     public class DatabaseCollectionReader
     {
+
+        /// <summary>
+        /// SessionFactoryConfiguration
+        /// Holder of DatabaseElement
+        /// </summary>
         public static SessionFactoryConfiguration conf { get; set; }
 
+
+
+        /// <summary>
+        /// Runs configuration.
+        /// </summary>
         static DatabaseCollectionReader()
         {
             if (ConfigurationSettings == null)
@@ -23,6 +37,11 @@ namespace Boot.Multitenancy.Configuration
                throw new Exception("SessionFactoryConfiguration is missing it's configuration.");
         }
 
+
+
+        /// <summary>
+        /// Get current Configuration.
+        /// </summary>
         private static System.Configuration.Configuration ConfigurationSettings
         {
             get{
