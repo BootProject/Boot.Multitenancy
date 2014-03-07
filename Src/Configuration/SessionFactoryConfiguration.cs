@@ -13,5 +13,12 @@ namespace Boot.Multitenancy.Configuration
         {
             get { return (DatabaseCollection)base["databases"]; }
         }
+
+        [ConfigurationProperty("persist")]
+        public bool Persist
+        {
+            get { return (bool)this["persist"]; }
+            set { this["persist"] = value; }
+        }
     }
 }

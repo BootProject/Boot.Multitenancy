@@ -1,0 +1,12 @@
+
+
+<xs:schema id="bootSectionSchema"
+           targetNamespace="http://tempuri.org/Boot.Multitenancy.xsd"
+           elementFormDefault="qualified"
+           xmlns="http://tempuri.org/Boot.Multitenancy.xsd"
+           xmlns:mstns="http://tempuri.org/Boot.Multitenancy.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="sessionFactoryConfiguration">
+    
+  </xs:element>
+</xs:schema>

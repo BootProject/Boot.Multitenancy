@@ -71,6 +71,9 @@
     <Compile Include="SessionFactoryContainer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Boot.Multitenancy.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
