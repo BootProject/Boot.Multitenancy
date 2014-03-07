@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boot.Multitenancy", "Src\Boot.Multitenancy.csproj", "{204DD028-0830-4916-9C8F-01CA9337A378}"
 EndProject
@@ -26,6 +26,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{117D89BE-188F-49D6-B58F-BA77F7E61175}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfTest", "ConfTest\ConfTest.csproj", "{0E446342-623E-41E3-817E-ECC899266DD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,11 +44,16 @@ Global
 		{35C6B96B-6035-438D-BFFB-224B1946DA60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35C6B96B-6035-438D-BFFB-224B1946DA60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35C6B96B-6035-438D-BFFB-224B1946DA60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E446342-623E-41E3-817E-ECC899266DD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E446342-623E-41E3-817E-ECC899266DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E446342-623E-41E3-817E-ECC899266DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E446342-623E-41E3-817E-ECC899266DD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{35C6B96B-6035-438D-BFFB-224B1946DA60} = {C4A0E174-F09C-4B80-8E63-4F340CA5E9A4}
+		{0E446342-623E-41E3-817E-ECC899266DD9} = {117D89BE-188F-49D6-B58F-BA77F7E61175}
 	EndGlobalSection
 EndGlobal

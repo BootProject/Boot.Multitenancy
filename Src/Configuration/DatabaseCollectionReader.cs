@@ -10,12 +10,30 @@ namespace Boot.Multitenancy.Configuration
 {
     public class DatabaseCollectionReader
     {
-        static SessionFactoryConfiguration conf { get; set; }
+        public static SessionFactoryConfiguration conf { get; set; }
 
         static DatabaseCollectionReader()
         {
-            var conf = ConfigurationManager.GetSection("Databases") as SessionFactoryConfiguration;
-            var db = conf.Databases;
+            if (ConfigurationSettings == null)
+                throw new Exception("configuration is null.");
+
+            conf = ConfigurationSettings.GetSection("sessionFactoryConfiguration") as SessionFactoryConfiguration;
+
+            if (conf == null)
+               throw new Exception("SessionFactoryConfiguration is missing it's configuration.");
         }
+
+        private static System.Configuration.Configuration ConfigurationSettings
+        {
+            get{
+                System.Configuration.Configuration configuration = null;
+                if (System.Web.HttpContext.Current != null)
+                    configuration = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
+                else
+                    configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+                return configuration;
+            }
+        } 
     }
 }

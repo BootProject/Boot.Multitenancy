@@ -50,24 +50,24 @@ namespace Boot.Multitenancy.Configuration
             }
         }
 
-        public int IndexOf(DatabaseSection url)
+        public int IndexOf(DatabaseSection section)
         {
-            return BaseIndexOf(url);
+            return BaseIndexOf(section);
         }
 
-        public void Add(DatabaseSection url)
+        public void Add(DatabaseSection section)
         {
-            BaseAdd(url);
+            BaseAdd(section);
         }
         protected override void BaseAdd(ConfigurationElement element)
         {
             BaseAdd(element, false);
         }
 
-        public void Remove(DatabaseSection url)
+        public void Remove(DatabaseSection section)
         {
-            if (BaseIndexOf(url) >= 0)
-                BaseRemove(url.Name);
+            if (BaseIndexOf(section) >= 0)
+                BaseRemove(section.Name);
         }
 
         public void RemoveAt(int index)

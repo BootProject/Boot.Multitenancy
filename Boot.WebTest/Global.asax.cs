@@ -13,7 +13,7 @@ namespace Boot.WebTest
     {
         protected void Application_Start()
         {
-            Host.Init();
+            //Host.Init();
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

@@ -12,8 +12,6 @@ namespace Boot.WebTest.Environment
     {
         public static void Init()
         {
-            new DatabaseCollectionReader();
-
             //Create 2 test databases.
             SessionFactoryContainer.Current
                 .Add("First", new Tenant("Data Source=|DataDirectory|FirstDB.sdf;Persist Security Info=False;").Create())
