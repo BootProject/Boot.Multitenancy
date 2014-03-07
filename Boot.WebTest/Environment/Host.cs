@@ -4,6 +4,7 @@ using System.Linq;
 using Boot.Multitenancy;
 using Boot.Multitenancy.Extensions;
 using FluentNHibernate.Conventions;
+using Boot.Multitenancy.Configuration;
 
 namespace Boot.WebTest.Environment
 {
@@ -11,6 +12,8 @@ namespace Boot.WebTest.Environment
     {
         public static void Init()
         {
+            new DatabaseCollectionReader();
+
             //Create 2 test databases.
             SessionFactoryContainer.Current
                 .Add("First", new Tenant("Data Source=|DataDirectory|FirstDB.sdf;Persist Security Info=False;").Create())

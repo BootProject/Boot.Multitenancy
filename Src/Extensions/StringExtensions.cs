@@ -9,10 +9,13 @@ namespace Boot.Multitenancy.Extensions
     /// </summary>
     public static class StringExtensions
     {
+
+
         /// <summary>
-        /// Return a Key(domain name stripped to base domain, for e.g "domain.com" or "localhost" without port nmbr.)
+        /// Return a Key(domainname stripped to base domain, for e.g "domain.com" or "localhost" without port nmbr.)
+        /// For e.g www.bootcms.com, bootcms.com
         /// </summary>
-        /// <param name="s"></param>
+        /// <param name="s">string s to extract key from.</param>
         /// <returns>The domain name</returns>
         public static string Key(this string s)
         {
@@ -23,7 +26,19 @@ namespace Boot.Multitenancy.Extensions
                 ~UriComponents.Path &
                 ~UriComponents.Scheme,
                 UriFormat.UriEscaped)
-                .Replace("www.", string.Empty);
+                .GetBaseDomain();
+        }
+
+
+
+        /// <summary>
+        /// Ensure that domain is in it's base form.
+        /// </summary>
+        /// <param name="s">The string to get base domain from.</param>
+        /// <returns></returns>
+        private static string GetBaseDomain(this string s)
+        {
+            return s.Replace("www", string.Empty);
         }
     }
 }

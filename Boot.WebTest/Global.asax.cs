@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Boot.WebTest.Environment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,8 @@ namespace Boot.WebTest
     {
         protected void Application_Start()
         {
+            Host.Init();
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

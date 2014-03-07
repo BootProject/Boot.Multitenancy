@@ -13,11 +13,12 @@ namespace Boot.Multitenancy.Extensions
     public static class SessionExtensions
     {
 
+
         /// <summary>
         /// WorkWrapper. Extensions for ISession.
         /// </summary>
         /// <param name="session">The current Session</param>
-        /// <param name="Work">Action work</param>
+        /// <param name="Work">Persist action work to function.</param>
         /// <returns></returns>
         private static ISession WorkWrapper(this ISession session, Action<ISession> Work)
         {
@@ -259,7 +260,7 @@ namespace Boot.Multitenancy.Extensions
 
 
         /// <summary>
-        /// Pagedlist
+        /// Paged list
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="session"></param>

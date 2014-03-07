@@ -8,6 +8,7 @@ using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Tool.hbm2ddl;
+using Boot.Multitenancy.Configuration;
 
 namespace Boot.WebTest.Environment
 {

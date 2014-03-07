@@ -45,6 +45,7 @@
       <HintPath>..\packages\NHibernate.4.0.0-Alpha1\lib\net40\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -54,11 +55,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\DatabaseCollection.cs" />
+    <Compile Include="Configuration\DatabaseSection.cs" />
+    <Compile Include="Configuration\DatabaseCollectionReader.cs" />
+    <Compile Include="Configuration\SessionFactoryConfiguration.cs" />
+    <Compile Include="Enumerations.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Filters\PersistAttribute.cs" />
     <Compile Include="ISessionDomain.cs" />
     <Compile Include="ISessionFactoryCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registry.cs" />
     <Compile Include="SessionFactory.cs" />
     <Compile Include="SessionFactoryContainer.cs" />
   </ItemGroup>
