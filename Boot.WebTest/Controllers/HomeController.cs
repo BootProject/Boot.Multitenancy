@@ -24,8 +24,7 @@ namespace Boot.WebTest.Controllers
 
         public ActionResult ReadConfig()
         {
-
-            SessionFactoryConfiguration conf = DatabaseCollectionReader.conf;
+            var conf = DatabaseCollectionReader.conf;
             var model = new ConfigsModel { Databases = conf.Databases };
 
             return View(model);

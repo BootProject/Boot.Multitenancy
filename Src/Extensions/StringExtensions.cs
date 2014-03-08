@@ -5,7 +5,7 @@ namespace Boot.Multitenancy.Extensions
 {
 
     /// <summary>
-    /// Contains various method extensions.
+    /// Contains various string extensions.
     /// </summary>
     public static class StringExtensions
     {
@@ -35,7 +35,7 @@ namespace Boot.Multitenancy.Extensions
         /// Ensure that domain is in it's base form.
         /// </summary>
         /// <param name="s">The string to get base domain from.</param>
-        /// <returns></returns>
+        /// <returns>Stripped off www in string</returns>
         private static string GetBaseDomain(this string s)
         {
             return s.Replace("www", string.Empty);

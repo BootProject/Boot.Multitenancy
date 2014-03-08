@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boot.Multitenancy.Filters
+namespace Boot.Multitenancy.Infrastructure
 {
-    [AttributeUsage(AttributeTargets.Class)]
-    public class PersistAttribute : Attribute
+    public interface IEntity
     {
-        
+
     }
+
 }

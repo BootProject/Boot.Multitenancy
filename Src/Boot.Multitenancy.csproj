@@ -55,14 +55,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BootHost.cs" />
+    <Compile Include="BootTenant.cs" />
+    <Compile Include="Configuration\ConnectionstringConfiguration.cs" />
     <Compile Include="Configuration\DatabaseCollection.cs" />
     <Compile Include="Configuration\DatabaseSection.cs" />
     <Compile Include="Configuration\DatabaseCollectionReader.cs" />
     <Compile Include="Configuration\SessionFactoryConfiguration.cs" />
+    <Compile Include="Data\DataConnector.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Filters\Extensions\FluentIgnore.cs" />
+    <Compile Include="Filters\NoEntity.cs" />
+    <Compile Include="Filters\NoProperty.cs" />
     <Compile Include="Filters\PersistAttribute.cs" />
+    <Compile Include="Infrastructure\IEntity.cs" />
     <Compile Include="ISessionDomain.cs" />
     <Compile Include="ISessionFactoryCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

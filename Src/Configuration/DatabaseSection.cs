@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Boot.Multitenancy.Configuration
 {
@@ -19,8 +15,9 @@ namespace Boot.Multitenancy.Configuration
         public DatabaseSection() { }
 
 
+
         /// <summary>
-        /// 
+        /// Creates a new DatabaseSection
         /// </summary>
         /// <param name="name">Name, Key</param>
         /// <param name="autoPersist">If to create this object</param>
@@ -37,7 +34,7 @@ namespace Boot.Multitenancy.Configuration
         /// <summary>
         /// Name of key
         /// </summary>
-        [ConfigurationProperty("name")]
+        [ConfigurationProperty("name", IsRequired = true)]
         public String Name
         {
             get { return (String)this["name"]; }
@@ -49,7 +46,7 @@ namespace Boot.Multitenancy.Configuration
         /// <summary>
         /// If to create this database
         /// </summary>
-        [ConfigurationProperty("autoPersist", DefaultValue = false, IsRequired = false)]
+        [ConfigurationProperty("autoPersist", DefaultValue = false, IsRequired = true)]
         public Boolean AutoPersist
         {
             get { return (Boolean)this["autoPersist"]; }
@@ -61,11 +58,13 @@ namespace Boot.Multitenancy.Configuration
         /// <summary>
         /// DbType
         /// </summary>
-        [ConfigurationProperty("dbType", DefaultValue = DbType.SqlCe, IsRequired = false)]
+        [ConfigurationProperty("dbType", DefaultValue = DbType.SqlCe, IsRequired = true)]
         public DbType DbType
         {
             get { return (DbType)this["dbType"]; }
             set { this["dbType"] = value; }
         }
+
+
     }
 }

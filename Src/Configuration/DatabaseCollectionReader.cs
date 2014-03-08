@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace Boot.Multitenancy.Configuration
@@ -15,26 +11,36 @@ namespace Boot.Multitenancy.Configuration
     public class DatabaseCollectionReader
     {
 
+
         /// <summary>
         /// SessionFactoryConfiguration
-        /// Holder of DatabaseElement
+        /// DatabaseElements and configuration.
         /// </summary>
         public static SessionFactoryConfiguration conf { get; set; }
 
 
 
         /// <summary>
-        /// Runs configuration.
+        /// Value if to create databases.
+        /// </summary>
+        public static bool PersistDatabases { get; private set; }
+
+
+
+        /// <summary>
+        /// Runs configurationtests.
         /// </summary>
         static DatabaseCollectionReader()
         {
             if (ConfigurationSettings == null)
-                throw new Exception("configuration is null.");
+                throw new Exception("Configuration is null.");
 
             conf = ConfigurationSettings.GetSection("sessionFactoryConfiguration") as SessionFactoryConfiguration;
-
+            
             if (conf == null)
-               throw new Exception("SessionFactoryConfiguration is missing it's configuration.");
+               throw new NotImplementedException("SessionFactoryConfiguration is missing it's configuration.");
+
+            PersistDatabases = conf.Persist;
         }
 
 
@@ -54,5 +60,7 @@ namespace Boot.Multitenancy.Configuration
                 return configuration;
             }
         } 
+
+
     }
 }

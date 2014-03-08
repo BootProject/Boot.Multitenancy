@@ -5,8 +5,13 @@ using System.Configuration;
 
 namespace Boot.Multitenancy.Configuration
 {
+
+    /// <summary>
+    /// SessionFactoryConfiguration stores information about databases set in web.config.
+    /// </summary>
     public class SessionFactoryConfiguration : ConfigurationSection
     {
+
 
         /// <summary>
         /// A list of databases, configurered in web.config.
@@ -19,6 +24,7 @@ namespace Boot.Multitenancy.Configuration
         }
 
 
+
         /// <summary>
         /// If to create databases by default.
         /// </summary>
@@ -28,5 +34,6 @@ namespace Boot.Multitenancy.Configuration
             get { return (bool)this["persist"]; }
             set { this["persist"] = value; }
         }
+
     }
 }

@@ -5,6 +5,8 @@ using Boot.Multitenancy;
 using Boot.Multitenancy.Extensions;
 using FluentNHibernate.Conventions;
 using Boot.Multitenancy.Configuration;
+using Con = Boot.Multitenancy.Configuration.ConnectionstringConfiguration;
+using Conf = Boot.Multitenancy;
 
 namespace Boot.WebTest.Environment
 {
@@ -12,10 +14,12 @@ namespace Boot.WebTest.Environment
     {
         public static void Init()
         {
+            bool persist = Conf.Configuration.DatabaseCollectionReader.conf.Persist;
+
             //Create 2 test databases.
             SessionFactoryContainer.Current
-                .Add("First", new Tenant("Data Source=|DataDirectory|FirstDB.sdf;Persist Security Info=False;").Create())
-                .Add("Second", new Tenant("Data Source=|DataDirectory|SecondDB.sdf;Persist Security Info=False;").Create());
+                .Add("First", new Tenant(Con.CreateConnectionstring(DbType.SqlCe, "First")).Create())
+                .Add("Second", new Tenant(Con.CreateConnectionstring(DbType.SqlCe, "Second")).Create());
 
             CheckEnvironmentSetup();
         }
