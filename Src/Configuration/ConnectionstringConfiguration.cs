@@ -8,6 +8,9 @@ namespace Boot.Multitenancy.Configuration
 {
     
     /// <summary>
+    /// 
+    /// NOTE!!!! Class not finished!!!!
+    /// 
     /// Stores information about known connectionstrings.
     /// Creates a connectionstring from a given name.
     /// </summary>

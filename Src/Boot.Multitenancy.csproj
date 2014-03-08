@@ -62,24 +62,21 @@
     <Compile Include="Configuration\DatabaseSection.cs" />
     <Compile Include="Configuration\DatabaseCollectionReader.cs" />
     <Compile Include="Configuration\SessionFactoryConfiguration.cs" />
-    <Compile Include="Data\DataConnector.cs" />
     <Compile Include="Enumerations.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Filters\Extensions\FluentIgnore.cs" />
     <Compile Include="Filters\NoEntity.cs" />
     <Compile Include="Filters\NoProperty.cs" />
-    <Compile Include="Filters\PersistAttribute.cs" />
     <Compile Include="Infrastructure\IEntity.cs" />
-    <Compile Include="ISessionDomain.cs" />
-    <Compile Include="ISessionFactoryCreator.cs" />
+    <Compile Include="Factory\ISessionFactoryCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registry.cs" />
-    <Compile Include="SessionFactory.cs" />
-    <Compile Include="SessionFactoryContainer.cs" />
+    <Compile Include="Factory\SessionFactory.cs" />
+    <Compile Include="Factory\SessionFactoryContainer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Boot.Multitenancy.xsd">
+    <None Include="Schema\Boot.Multitenancy.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />

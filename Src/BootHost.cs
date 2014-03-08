@@ -1,64 +1,108 @@
-﻿using Boot.Multitenancy.Configuration;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Boot.Multitenancy.Extensions;
+using Boot.Multitenancy.Configuration;
 using Conf = Boot.Multitenancy;
+using Con = Boot.Multitenancy.Configuration.ConnectionstringConfiguration;
 
 namespace Boot.Multitenancy
 {
+
+    /// <summary>
+    /// Static implementation of BootHost.
+    /// Inits configuration and create install scripts for database.
+    /// </summary>
     public static class BootHost
     {
+
+
+        /// <summary>
+        /// A lazy init of Boot.Multitenancy
+        /// Reads out information from web.config and create items depending on configuration.
+        /// </summary>
         public static void Init()
         {
             if (CreateEnvironment())
                 Setup();
         }
 
-        public static void Setup()
+
+
+        /// <summary>
+        /// Creates instance of databases.
+        /// </summary>
+        private static void Setup()
         {
-            (from c in ConvertToList(Collection)
-                select c).ToList().ForEach(d => {
-                    new BootTenant(Conf.Configuration.ConnectionstringConfiguration.CreateConnectionstring(DbType.SqlCe, d.Name));
-                });
+            var session = SessionFactoryContainer.Current;
+
+            (from configuration in Databases
+                select configuration)
+                    .ToList()
+                        .ForEach(database => {
+                            session.Add(database.Name, 
+                                new BootTenant(Con.CreateConnectionstring(database.DbType, database.Name))
+                                  .Create());
+                        }
+             );
         }
 
 
-        public static List<DatabaseSection> ConvertToList(ICollection col)
-        {
-            return Collection.CollectionToList<DatabaseSection>();
-        }
 
-        public static DatabaseCollection Collection
-        {
-            get { return Configuration.Databases; }
-        }
-
-
-        public static bool CreateEnvironment()
+        /// <summary>
+        /// Varaiable to check for setup.
+        /// </summary>
+        /// <returns></returns>
+        private static bool CreateEnvironment()
         {
             return Configuration.Persist;
         }
 
 
-        public static SessionFactoryConfiguration Configuration
+
+        /// <summary>
+        /// A set of databases listed from web.config
+        /// </summary>
+        private static List<DatabaseSection> Databases
+        {
+            get { return ConvertToList(Collection); }
+        }
+
+
+
+        /// <summary>
+        /// Convert a Collection to a List<T>
+        /// </summary>
+        /// <param name="col"></param>
+        /// <returns></returns>
+        private static List<DatabaseSection> ConvertToList(ICollection col)
+        {
+            return Collection.CollectionToList<DatabaseSection>();
+        }
+
+
+
+        /// <summary>
+        /// The DatabaseCollection. 
+        /// </summary>
+        private static DatabaseCollection Collection
+        {
+            get { return Configuration.Databases; }
+        }
+
+
+
+        /// <summary>
+        /// Get the SessionFactoryConfiguration
+        /// </summary>
+        private static SessionFactoryConfiguration Configuration
         {
             get { return Conf.Configuration.DatabaseCollectionReader.conf; }
         }
     }
 
-
-    public static class Helpers
-    {
-        public static List<T> CollectionToList<T>(this System.Collections.ICollection other)
-        {
-            var output = new List<T>(other.Count);
-
-            output.AddRange(other.Cast<T>());
-
-            return output;
-        }
-    }
 }

@@ -66,5 +66,33 @@ namespace Boot.Multitenancy.Configuration
         }
 
 
+
+
+        /// <summary>
+        /// Custom connectionstring.
+        /// Use this to init your own connectionstring
+        /// </summary>
+        [ConfigurationProperty("connectionString", IsRequired = false)]
+        public String Connectionstring
+        {
+            get { return (string)this["connectionString"]; }
+            set { this["connectionString"] = value; }
+        }
+
+
+
+
+        /// <summary>
+        /// Domains, separated with |.
+        /// Domains associated with this database.
+        /// </summary>
+        [ConfigurationProperty("domains", IsRequired = false)]
+        public String Domains
+        {
+            get { return (string)this["domains"]; }
+            set { this["domains"] = value; }
+        }
+
+
     }
 }

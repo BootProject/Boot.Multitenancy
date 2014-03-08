@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 
 namespace Boot.Multitenancy.Extensions
@@ -39,6 +40,18 @@ namespace Boot.Multitenancy.Extensions
         private static string GetBaseDomain(this string s)
         {
             return s.Replace("www", string.Empty);
+        }
+
+
+        /// <summary>
+        /// Converts 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static List<string> CreateList(this string s) 
+        {
+            var c = new char[] { '|' };
+            return (s.Split( c )).CollectionToList<string>();
         }
     }
 }

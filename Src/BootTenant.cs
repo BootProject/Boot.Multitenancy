@@ -16,7 +16,7 @@ namespace Boot.Multitenancy
     public class BootTenant : ISessionFactoryCreator
     {
 
-        private static string Connectionstring { get; private set; }
+        private static string Connectionstring { get; set; }
 
 
         /// <summary>

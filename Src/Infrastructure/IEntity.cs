@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Boot.Multitenancy.Infrastructure
 {
-    public interface IEntity
-    {
-
-    }
+    /// <summary>
+    /// Interface IEntity.
+    /// Base dependency to Map classes for FluentnHibernate.
+    /// </summary>
+    public interface IEntity { }
 
 }
