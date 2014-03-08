@@ -4,6 +4,7 @@ using System.Linq;
 using Boot.Multitenancy.Extensions;
 using FluentNHibernate.Conventions;
 using NHibernate;
+using System;
 
 namespace Boot.Multitenancy
 {
@@ -11,7 +12,7 @@ namespace Boot.Multitenancy
     /// <summary>
     /// Creates SessionFactories
     /// </summary>
-    public class SessionFactoryContainer
+    public class SessionFactoryContainer : IDisposable
     {
         
         /// <summary>
@@ -91,6 +92,11 @@ namespace Boot.Multitenancy
         private SessionFactoryContainer()
         {
             SessionFactories = new Dictionary<string, ISessionFactory>();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

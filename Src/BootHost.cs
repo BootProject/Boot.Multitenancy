@@ -38,17 +38,18 @@ namespace Boot.Multitenancy
         /// </summary>
         private static void Setup()
         {
-            var session = SessionFactoryContainer.Current;
-
-            (from configuration in Databases
-                select configuration)
-                    .ToList()
-                        .ForEach(database => {
-                            session.Add(database.Name, 
-                                new BootTenant(Con.CreateConnectionstring(database.DbType, database.Name))
-                                  .Create());
-                        }
-             );
+            using (var session = SessionFactoryContainer.Current) {
+                (from configuration in Databases
+                    select configuration)
+                        .ToList()
+                            .ForEach(database => {
+                                session.Add(database.Name, 
+                                    new BootTenant(Con.CreateConnectionstring(database.DbType, database.Name))
+                                      .Create());
+                             }
+                        
+                );
+            }
         }
 
 
