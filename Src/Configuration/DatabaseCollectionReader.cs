@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Web;
 
+
 namespace Boot.Multitenancy.Configuration
 {
 
@@ -60,7 +61,6 @@ namespace Boot.Multitenancy.Configuration
                 return configuration;
             }
         } 
-
 
     }
 }

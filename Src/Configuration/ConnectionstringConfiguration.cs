@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Boot.Multitenancy.Extensions;
 
 namespace Boot.Multitenancy.Configuration
 {
     
     /// <summary>
     /// 
-    /// NOTE!!!! Class not finished!!!!
+    /// NOTE!!!! Not finished!!!! Only SqlCe is implemented. 
     /// 
     /// Stores information about known connectionstrings.
     /// Creates a connectionstring from a given name.
@@ -17,15 +18,9 @@ namespace Boot.Multitenancy.Configuration
     public static class ConnectionstringConfiguration
     {
 
-
         //SqlCe
         static readonly string SqlCeConnectionstring = "Data Source=|DataDirectory|{0}.sdf;Persist Security Info=False;";
-        //SqlServer2008
-        static readonly string SqlServer2008Connectionstring = "Data Source=|DataDirectory|{0}.sdf;Persist Security Info=False;";
-        //MySql5
-        static readonly string MySql5Connectionstring = "Data Source=|DataDirectory|{0}.sdf;Persist Security Info=False;";
-
-
+      
 
 
         /// <summary>
@@ -39,11 +34,11 @@ namespace Boot.Multitenancy.Configuration
             switch (dbtype)
             {
                 case DbType.SqlCe:
-                    return string.Format(SqlCeConnectionstring, key);
+                    return string.Format(SqlCeConnectionstring, key.Key());
                 case DbType.SqlServer2008:
-                    return string.Format(SqlServer2008Connectionstring, key);
+                    return string.Empty;
                 case DbType.MySql5:
-                    return string.Format(MySql5Connectionstring, key);
+                    return string.Empty;
                 default:
                     return string.Empty;
             }

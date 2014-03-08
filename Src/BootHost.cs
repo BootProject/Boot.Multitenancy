@@ -34,6 +34,28 @@ namespace Boot.Multitenancy
 
 
         /// <summary>
+        /// Reads out configuration before creating scripts.
+        /// Usually used to create database before init configuration.
+        /// When ready, Call Init();
+        /// </summary>
+        /// <returns>A list of ConnectionElement</returns>
+        public static List<ConnectionElement> InitCreate()
+        {
+            var connectionElements = new List<ConnectionElement>();
+            (from d in Databases select d).ToList().ForEach(p => {
+                connectionElements.Add(
+                    new ConnectionElement { 
+                        Name = p.Name, 
+                        Connectionstring = Con.CreateConnectionstring(p.DbType, p.Name) 
+                    });
+            });
+
+            return connectionElements;
+        }
+
+
+
+        /// <summary>
         /// Creates instance of databases.
         /// </summary>
         private static void Setup()

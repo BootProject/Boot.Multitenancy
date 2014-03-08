@@ -73,7 +73,7 @@ namespace Boot.Multitenancy
         /// </summary>
         /// <param name="key">The key for this connection</param>
         /// <param name="sessionFactory">ISessionFactory to add</param>
-        /// <returns></returns>
+        /// <returns>Current SessionFactoryContainer</returns>
         public SessionFactoryContainer Add(string key, ISessionFactory sessionFactory)
         {
             lock (Lock)
@@ -94,9 +94,7 @@ namespace Boot.Multitenancy
             SessionFactories = new Dictionary<string, ISessionFactory>();
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+
+        public void Dispose() { }
     }
 }

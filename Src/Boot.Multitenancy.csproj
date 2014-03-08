@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="BootHost.cs" />
     <Compile Include="BootTenant.cs" />
+    <Compile Include="Configuration\ConnectionElement.cs" />
     <Compile Include="Configuration\ConnectionstringConfiguration.cs" />
     <Compile Include="Configuration\DatabaseCollection.cs" />
     <Compile Include="Configuration\DatabaseSection.cs" />

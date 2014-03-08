@@ -90,6 +90,8 @@ namespace Boot.Multitenancy
         /// <returns>IPersistenceConfigurer configuration</returns>
         private static IPersistenceConfigurer DatabaseConfiguration()
         {
+
+            //TODO: Select custom provider
             return MsSqlCeConfiguration.MsSqlCe40
                 .UseOuterJoin()
                 .ConnectionString(Connectionstring)

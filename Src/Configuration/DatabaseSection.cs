@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using Boot.Multitenancy.Extensions;
 
 namespace Boot.Multitenancy.Configuration
 {
@@ -93,6 +95,14 @@ namespace Boot.Multitenancy.Configuration
             set { this["domains"] = value; }
         }
 
+
+        /// <summary>
+        /// A list of domains.
+        /// </summary>
+        public List<string> DomainList
+        {
+            get { return Domains.CreateList(); }
+        }
 
     }
 }
