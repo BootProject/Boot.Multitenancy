@@ -31,6 +31,9 @@ namespace Boot.Multitenancy.Configuration
         /// <returns>A connectionstring</returns>
         public static string CreateConnectionstring(DbType dbtype, string key)
         {
+            if (Exist(key))
+                return string.Empty;
+
             switch (dbtype)
             {
                 case DbType.SqlCe:
@@ -42,6 +45,13 @@ namespace Boot.Multitenancy.Configuration
                 default:
                     return string.Empty;
             }
+        }
+
+        private static bool Exist(string path)
+        {
+            if (System.IO.File.Exists(path))
+                return true;
+            return false;
         }
     }
 }

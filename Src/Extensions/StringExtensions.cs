@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace Boot.Multitenancy.Extensions
@@ -20,16 +21,33 @@ namespace Boot.Multitenancy.Extensions
         /// <returns>The domain name</returns>
         public static string Key(this string s)
         {
-            return new Uri(HttpContext.Current.Request.Url.ToString()) //No need to throw exception here if not found.
-                .GetComponents(
-                UriComponents.AbsoluteUri &
-                ~UriComponents.Port &
-                ~UriComponents.Path &
-                ~UriComponents.Scheme,
-                UriFormat.UriEscaped)
-                .GetBaseDomain();
+            try {
+                return new Uri(HttpContext.Current.Request.Url.ToString()) //No need to throw exception here if not found.
+                    .GetComponents(
+                    UriComponents.AbsoluteUri &
+                    ~UriComponents.Port &
+                    ~UriComponents.Path &
+                    ~UriComponents.Scheme,
+                    UriFormat.UriEscaped)
+                    .GetBaseDomain();
+            }
+            catch {
+                return s.GetBaseDomainObject();
+            }
         }
 
+
+
+        /// <summary>
+        /// Strip a domain to it's base.
+        /// </summary>
+        /// <param name="s">The string to check.</param>
+        /// <returns>The corrected base domain</returns>
+        public static string GetBaseDomainObject(this string s)
+        {
+            Match match = Regex.Match(s, "([^.]+\\.[^.]{1,3}(\\.[^.]{1,3})?)$");
+            return  match.Groups[1].Success ? match.Groups[1].Value : null;
+        }
 
 
         /// <summary>
@@ -44,7 +62,7 @@ namespace Boot.Multitenancy.Extensions
 
 
         /// <summary>
-        /// Converts 
+        /// Converts an array with a | as delimiter.
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>

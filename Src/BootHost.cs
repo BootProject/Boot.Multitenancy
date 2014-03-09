@@ -27,7 +27,7 @@ namespace Boot.Multitenancy
         /// </summary>
         public static void Init()
         {
-            if (CreateEnvironment())
+            if (CreateEnvironment()) //If the configuration is set to false, we dont continue.
                 Setup();
         }
 
@@ -42,13 +42,15 @@ namespace Boot.Multitenancy
         public static List<ConnectionElement> InitCreate()
         {
             var connectionElements = new List<ConnectionElement>();
-            (from d in Databases select d).ToList().ForEach(p => {
-                connectionElements.Add(
-                    new ConnectionElement { 
-                        Name = p.Name, 
-                        Connectionstring = Con.CreateConnectionstring(p.DbType, p.Name) 
-                    });
-            });
+            (from d in Databases select d)
+                    .ToList()
+                        .ForEach(p => {
+                            connectionElements.Add(
+                                new ConnectionElement { 
+                                    Name = p.Name, 
+                                    Connectionstring = Con.CreateConnectionstring(p.DbType, p.Name) 
+                                });
+                        });
 
             return connectionElements;
         }
@@ -60,12 +62,12 @@ namespace Boot.Multitenancy
         /// </summary>
         private static void Setup()
         {
-            using (var session = SessionFactoryContainer.Current) {
+            using (var session = SessionFactoryContainer.Current) { //Init SessionFactoryContainer and add our database connections.
                 (from configuration in Databases
                     select configuration)
                         .ToList()
                             .ForEach(database => {
-                                session.Add(database.Name, 
+                                session.Add(database.Name.Key(), 
                                     new BootTenant(Con.CreateConnectionstring(database.DbType, database.Name))
                                       .Create());
                              }

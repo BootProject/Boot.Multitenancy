@@ -68,6 +68,19 @@ namespace Boot.Multitenancy
 
 
 
+
+        /// <summary>
+        /// Creates a instance of an open ISession.
+        /// </summary>
+        /// <param name="key">The key of session to open.</param>
+        /// <returns>Open ISession object</returns>
+        public static ISession GetCurrentSession(string key)
+        {
+            return GetCurrentFactory(key).OpenSession();
+        }
+
+
+
         /// <summary>
         /// Add a SessionFactory named by a Key value
         /// </summary>
