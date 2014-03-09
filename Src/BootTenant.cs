@@ -62,7 +62,7 @@ namespace Boot.Multitenancy
                     var conf = WebConfigurationManager
                             .GetSection("sessionFactoryConfiguration") 
                                     as SessionFactoryConfiguration;
-                    if(conf.Namespace==string.Empty)
+                    if(conf.Namespace!=string.Empty)
                         return conf.Namespace;
 
                     return "Boot";
