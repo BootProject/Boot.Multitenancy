@@ -42,13 +42,13 @@ namespace Boot.Multitenancy
         public static List<ConnectionElement> InitCreate()
         {
             var connectionElements = new List<ConnectionElement>();
-            (from d in Databases select d)
+            (from databaseSection in Databases select databaseSection)
                     .ToList()
-                        .ForEach(p => {
+                        .ForEach(database => {
                             connectionElements.Add(
-                                new ConnectionElement { 
-                                    Name = p.Name, 
-                                    Connectionstring = Con.CreateConnectionstring(p.DbType, p.Name) 
+                                new ConnectionElement {
+                                    Name = database.Name,
+                                    Connectionstring = Con.CreateConnectionstring(database.DbType, database.Name) 
                                 });
                         });
 
