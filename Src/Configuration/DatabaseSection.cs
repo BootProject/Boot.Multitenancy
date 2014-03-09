@@ -103,6 +103,5 @@ namespace Boot.Multitenancy.Configuration
         {
             get { return Domains.CreateList(); }
         }
-
     }
 }

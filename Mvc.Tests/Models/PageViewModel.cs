@@ -17,7 +17,7 @@ namespace WebApplication1.Models
 
         public PageViewModel()
         {
-            Conn = SessionFactoryContainer.GetCurrentSession("bootcms.se");
+            Conn = SessionFactoryHostContainer.CurrentFactory.OpenSession();
             
             InsertPage();
             CreateSettings();
@@ -56,38 +56,33 @@ namespace WebApplication1.Models
 
         public void CreateSettings()
         {
-           
-                if (Conn.QueryOver<Settings>().RowCount() == 0)
-                {
-                    var s = new Settings { Id = 1, Title = "Boot Project", FooterText = "(c) All rights reserved Boot Project" };
-                    Conn.Save(s);
-                    Conn.Flush();
-                }
-            
+            if (Conn.QueryOver<Settings>().RowCount() == 0)
+            {
+                var s = new Settings { Id = 1, Title = "Boot Project", FooterText = "(c) All rights reserved Boot Project" };
+                Conn.Save(s);
+                Conn.Flush();
+            }
         }
 
         //Create first page
         public void InsertPage()
         {
-                if (Conn.QueryOver<Page>().RowCount() == 0)
+            if (Conn.QueryOver<Page>().RowCount() == 0)
+            {
+                Page p = new Page()
                 {
-                    Page p = new Page()
-                    {
-                        Id = 1,
-                        Action = "Index",
-                        Controller = "Home",
-                        Active = true,
-                        MetaTitle = "Boot Project",
-                        ParentId = 0,
-                        Title = "Start",
-                        Url = ""
-                    };
-                    Conn.Save<Page>(p);
-                    Conn.Flush();
-                }
-              
+                    Id = 1,
+                    Action = "Index",
+                    Controller = "Home",
+                    Active = true,
+                    MetaTitle = "Boot Project",
+                    ParentId = 0,
+                    Title = "Start",
+                    Url = ""
+                };
+                Conn.Save<Page>(p);
+                Conn.Flush();
+            } 
         }
-
-
     }
 }

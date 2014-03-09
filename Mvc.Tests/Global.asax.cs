@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlServerCe;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -14,18 +15,17 @@ namespace WebApplication1
     {
         protected void Application_Start()
         {
-
+            //Lets create some databases.
+            //Extraxt database names from web.config and create them in app_data folder.
             (from db in App.BootHost.InitCreate() select db)
                 .ToList()
                     .ForEach(d => {
-                        try {
+                        try{
                             new SqlCeEngine(d.Connectionstring).CreateDatabase();
-                        }catch { }
+                        } catch { }
                     });
 
             App.BootHost.Init();
-
-
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

@@ -38,6 +38,19 @@ namespace Boot.Multitenancy.Extensions
 
 
 
+
+        public static string GetDomain(this string s)
+        {
+            return new Uri(HttpContext.Current.Request.Url.ToString()) //No need to throw exception here if not found.
+                    .GetComponents(
+                    UriComponents.AbsoluteUri &
+                    ~UriComponents.Port &
+                    ~UriComponents.Path &
+                    ~UriComponents.Scheme,
+                    UriFormat.UriEscaped);
+        }
+
+
         /// <summary>
         /// Strip a domain to it's base.
         /// </summary>
@@ -57,7 +70,7 @@ namespace Boot.Multitenancy.Extensions
         /// <returns>Stripped off www in string</returns>
         private static string GetBaseDomain(this string s)
         {
-            return s.Replace("www", string.Empty);
+            return s.Replace("www.", string.Empty);
         }
 
 

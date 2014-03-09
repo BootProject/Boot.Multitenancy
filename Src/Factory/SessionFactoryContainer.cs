@@ -1,10 +1,9 @@
-﻿
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Boot.Multitenancy.Extensions;
 using FluentNHibernate.Conventions;
 using NHibernate;
-using System;
 
 namespace Boot.Multitenancy
 {
@@ -14,7 +13,7 @@ namespace Boot.Multitenancy
     /// </summary>
     public class SessionFactoryContainer : IDisposable
     {
-        
+
         /// <summary>
         /// Current ISessionFactory
         /// </summary>
@@ -31,7 +30,8 @@ namespace Boot.Multitenancy
         //Init
         static SessionFactoryContainer()
         {
-            lock (Lock) {
+            lock (Lock)
+            {
                 Current = new SessionFactoryContainer();
             }
         }

@@ -62,14 +62,16 @@ namespace Boot.Multitenancy
         /// </summary>
         private static void Setup()
         {
-            using (var session = SessionFactoryContainer.Current) { //Init SessionFactoryContainer and add our database connections.
+            using (var session = SessionFactoryHostContainer.Current) { //Init SessionFactoryContainer and add our database connections.
                 (from configuration in Databases
                     select configuration)
                         .ToList()
                             .ForEach(database => {
-                                session.Add(database.Name.Key(), 
+                                session.Add(database.Name, 
                                     new BootTenant(Con.CreateConnectionstring(database.DbType, database.Name))
-                                      .Create());
+                                      .Create(),
+                                      database.Domains.CreateList()
+                                    );
                              }
                         
                 );

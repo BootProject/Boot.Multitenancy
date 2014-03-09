@@ -10,7 +10,7 @@ namespace Boot.Multitenancy.Configuration
     
     /// <summary>
     /// 
-    /// NOTE!!!! Not finished!!!! Only SqlCe is implemented. 
+    /// NOTE!!!! Not fully completed!!!! Only SqlCe is implemented. 
     /// 
     /// Stores information about known connectionstrings.
     /// Creates a connectionstring from a given name.
@@ -31,13 +31,10 @@ namespace Boot.Multitenancy.Configuration
         /// <returns>A connectionstring</returns>
         public static string CreateConnectionstring(DbType dbtype, string key)
         {
-            if (Exist(key))
-                return string.Empty;
-
             switch (dbtype)
             {
                 case DbType.SqlCe:
-                    return string.Format(SqlCeConnectionstring, key.Key());
+                    return string.Format(SqlCeConnectionstring, key);
                 case DbType.SqlServer2008:
                     return string.Empty;
                 case DbType.MySql5:
@@ -45,13 +42,6 @@ namespace Boot.Multitenancy.Configuration
                 default:
                     return string.Empty;
             }
-        }
-
-        private static bool Exist(string path)
-        {
-            if (System.IO.File.Exists(path))
-                return true;
-            return false;
         }
     }
 }
