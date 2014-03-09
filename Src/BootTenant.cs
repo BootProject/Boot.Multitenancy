@@ -58,10 +58,14 @@ namespace Boot.Multitenancy
         private static string Namespace
         {
             get {
+                    
                     var conf = WebConfigurationManager
                             .GetSection("sessionFactoryConfiguration") 
-                                   as SessionFactoryConfiguration;
-                    return conf.Namespace;
+                                    as SessionFactoryConfiguration;
+                    if(conf.Namespace==string.Empty)
+                        return conf.Namespace;
+
+                    return "Boot";
                 }
         }
 

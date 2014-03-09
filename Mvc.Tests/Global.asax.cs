@@ -26,14 +26,17 @@ namespace WebApplication1
                         } catch { }
                     });
 
- 
             Host.Init();
-            
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        public void Application_BeginRequest(object sender, EventArgs e)
+        {
+            
         }
     }
 }
