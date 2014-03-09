@@ -10,9 +10,11 @@ namespace Boot.Multitenancy
 
     /// <summary>
     /// Creates SessionFactories
+    /// Usally used when static databases are used.
     /// </summary>
     public class SessionFactoryContainer : IDisposable
     {
+
 
         /// <summary>
         /// Current ISessionFactory

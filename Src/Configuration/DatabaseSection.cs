@@ -87,6 +87,8 @@ namespace Boot.Multitenancy.Configuration
         /// <summary>
         /// Domains, separated with |.
         /// Domains associated with this database.
+        /// Note!! Is case sensitive.
+        /// For eg. Boot.Multitenancy starts with Boot not boot.
         /// </summary>
         [ConfigurationProperty("domains", IsRequired = false)]
         public String Domains

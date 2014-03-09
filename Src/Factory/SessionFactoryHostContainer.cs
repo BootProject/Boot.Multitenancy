@@ -22,14 +22,13 @@ namespace Boot.Multitenancy
 
 
 
-
         private static readonly object Lock = new object();
         internal Dictionary<string, SessionFactoryData> SessionFactories { get; set; }
 
 
 
 
-        //Init
+        //Static Ctor
         static SessionFactoryHostContainer()
         {
             lock (Lock) {
@@ -46,17 +45,17 @@ namespace Boot.Multitenancy
         {
             get
             {
-                ISessionFactory sess = null;        
+                ISessionFactory sessionFactory = null;        
 
                 foreach (var item in Current.SessionFactories.ToList()) {
                     foreach(var domain in item.Value.DnsRecords) {
-                        if (domain.Equals(string.Empty.GetDomain())) { 
-                            sess = item.Value.SessionFactory;
+                        if (domain.Equals(string.Empty.GetDomain())) {
+                            sessionFactory = item.Value.SessionFactory;
                             break;
                         }
                     }
                 }
-                return sess;
+                return sessionFactory;
             }
         }
 
@@ -74,7 +73,6 @@ namespace Boot.Multitenancy
         {
             lock (Lock)
             {
-
                 if (Current.SessionFactories.ContainsKey(key).IsNotAny()) { 
                     Current.SessionFactories.Add(key, 
                         new SessionFactoryData{ 
@@ -86,6 +84,9 @@ namespace Boot.Multitenancy
             }
         }
 
+
+
+
         /// <summary>
         /// Instantiate a new Dictionary object.
         /// </summary>
@@ -95,6 +96,11 @@ namespace Boot.Multitenancy
         }
 
 
+
+
+        /// <summary>
+        /// Dispose
+        /// </summary>
         public void Dispose() { }
     }
 }

@@ -9,7 +9,7 @@ namespace Boot.Multitenancy
 {
 
     /// <summary>
-    /// Holder of ISessionFactory and the associated domains.
+    /// Holder of a ISessionFactory and the associated domains.
     /// </summary>
     internal class SessionFactoryData : IDisposable
     {

@@ -7,17 +7,18 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using App = Boot.Multitenancy;
+using Host = Boot.Multitenancy.BootHost;
 
 namespace WebApplication1
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+
         protected void Application_Start()
         {
-            //Lets create some databases.
+            //Create some databases.
             //Extraxt database names from web.config and create them in app_data folder.
-            (from db in App.BootHost.InitCreate() select db)
+            (from configuration in Host.PreInit() select configuration)
                 .ToList()
                     .ForEach(d => {
                         try{
@@ -25,7 +26,9 @@ namespace WebApplication1
                         } catch { }
                     });
 
-            App.BootHost.Init();
+ 
+            Host.Init();
+            
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

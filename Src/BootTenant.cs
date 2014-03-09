@@ -1,4 +1,5 @@
-﻿using Boot.Multitenancy.Filters;
+﻿using Boot.Multitenancy.Configuration;
+using Boot.Multitenancy.Filters;
 using Boot.Multitenancy.Filters.Extensions;
 using Boot.Multitenancy.Infrastructure;
 using FluentNHibernate.Automapping;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 
 namespace Boot.Multitenancy
 {
@@ -19,10 +21,11 @@ namespace Boot.Multitenancy
         private static string Connectionstring { get; set; }
 
 
+
         /// <summary>
         /// Init a new Tenant with a connectionstring.
         /// </summary>
-        /// <param name="connectionstring"></param>
+        /// <param name="connectionstring">Database connectionstring</param>
         public BootTenant(string connectionstring)
         {
             Connectionstring = connectionstring;
@@ -30,10 +33,11 @@ namespace Boot.Multitenancy
 
 
 
+
         /// <summary>
-        /// Init and return a SessionFactory.
+        /// Create SessionFactory.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>ISessionFactory</returns>
         public NHibernate.ISessionFactory Create()
         {
             return Fluently
@@ -44,6 +48,23 @@ namespace Boot.Multitenancy
                   .ExposeConfiguration(ValidateSchema)
                   .BuildSessionFactory();
         }
+
+
+
+
+        /// <summary>
+        /// Returns the namespace within assemblies to look for IEntity.
+        /// </summary>
+        private static string Namespace
+        {
+            get {
+                    var conf = WebConfigurationManager
+                            .GetSection("sessionFactoryConfiguration") 
+                                   as SessionFactoryConfiguration;
+                    return conf.Namespace;
+                }
+        }
+
 
 
 
@@ -59,8 +80,8 @@ namespace Boot.Multitenancy
                  select assemblies)
                 .ToList()
                 .ForEach(a =>
-                {   //Ignore other assemblies since there's no Entity's created in them. (MSCoreLib makes load fail)
-                    if (a.FullName.StartsWith("Boot"))
+                {   //Ignore other assemblies since we haven't created any Entity's in them. (MSCoreLib makes load fail)
+                    if (a.FullName.StartsWith(Namespace))
                     {
                         fmc.AutoMappings.Add(AutoMap.Assembly(a)
                             .OverrideAll(p => p.SkipProperty(typeof(NoProperty)))
@@ -68,6 +89,7 @@ namespace Boot.Multitenancy
                     }
                 });
         }
+
 
 
 

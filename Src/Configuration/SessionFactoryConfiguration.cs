@@ -35,5 +35,17 @@ namespace Boot.Multitenancy.Configuration
             set { this["persist"] = value; }
         }
 
+
+
+        /// <summary>
+        /// The namespace to look for IEntity.
+        /// </summary>
+        [ConfigurationProperty("namespace", IsRequired=true)]
+        public string Namespace
+        {
+            get { return (string)this["namespace"]; }
+            set { this["namespace"] = value; }
+        }
+
     }
 }

@@ -28,7 +28,7 @@ namespace Boot.Multitenancy
         public static void Init()
         {
             if (CreateEnvironment()) //If the configuration is set to false, we dont continue.
-                Setup();
+                InitConfiguration();
         }
 
 
@@ -39,7 +39,7 @@ namespace Boot.Multitenancy
         /// When ready, Call Init();
         /// </summary>
         /// <returns>A list of ConnectionElement</returns>
-        public static List<ConnectionElement> InitCreate()
+        public static List<ConnectionElement> PreInit()
         {
             var connectionElements = new List<ConnectionElement>();
             (from databaseSection in Databases select databaseSection)
@@ -60,7 +60,7 @@ namespace Boot.Multitenancy
         /// <summary>
         /// Creates instance of databases.
         /// </summary>
-        private static void Setup()
+        private static void InitConfiguration()
         {
             using (var session = SessionFactoryHostContainer.Current) { //Init SessionFactoryContainer and add our database connections.
                 (from configuration in Databases
@@ -70,7 +70,7 @@ namespace Boot.Multitenancy
                                 session.Add(database.Name, 
                                     new BootTenant(Con.CreateConnectionstring(database.DbType, database.Name))
                                       .Create(),
-                                      database.Domains.CreateList()
+                                      database.DomainList
                                     );
                              }
                         
