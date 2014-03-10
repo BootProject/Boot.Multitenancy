@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -29,16 +29,23 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - @Model.Settings.FooterText</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <div class="container">
+        <br/>
+        @RenderBody()
+    </div>
+        <div class="container">
+            <footer>
+                <p>
+                    &copy; @DateTime.Now.Year -<em style="color:green"> @Model.Settings.FooterText </em>
+                <p>
+                    <strong>Visit other sites: </strong>
+                    <a href="http://www.boot.com">www.boot.com</a> | <a href="http://www.boot.se">www.boot.se</a> | <a href="http://www.boot.net">www.boot.net</a> | <a href="http://dev.boot.com">dev.boot.net</a> | <a href="http://tech.boot.com">tech.boot.com</a>
+                </p>
+            </footer>
+        </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 </body>
 </html>

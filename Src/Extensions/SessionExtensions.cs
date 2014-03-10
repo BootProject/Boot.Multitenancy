@@ -287,6 +287,10 @@ namespace Boot.Multitenancy.Extensions
         /// <returns></returns>
         public static ISession WithTransaction(this ISession session, Action<ISession> unitsOfWork)
         {
+            if (session.IsConnected == false) { //This should never happend. ??
+                throw new Exception("Something has happend to the session... It's currently closed.");
+            }
+
             session.BeginTransaction();
 
             try{

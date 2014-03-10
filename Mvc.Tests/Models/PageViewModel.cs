@@ -8,6 +8,9 @@ using NHibernate;
 using Boot.Multitenancy.Extensions;
 using log4net;
 using System.Reflection;
+using FluentNHibernate.Mapping;
+
+
 
 namespace WebApplication1.Models
 {
@@ -28,6 +31,7 @@ namespace WebApplication1.Models
             Page = Session.Get<Page>(1);
 
         }
+
 
         public Page Page
         {
@@ -55,18 +59,61 @@ namespace WebApplication1.Models
         /// </summary>
         public void CreateDefaults()
         {
-            var s = new Settings { Id = 1, Title = "Boot Project", FooterText = "(c) All rights reserved Boot Project" };
-            TransactionSave<Settings>(s);
+            try {
+                CreateContent();
 
-            var page = new Page() { Id = 1, Action = "Index", Controller = "Home", Active = true, MetaTitle = "Boot Project", ParentId = 0, Title = "Start", Url = "" };
-            TransactionSave<Page>(page);
+                var page = new Page() { Id = 1, Action = "Index", Controller = "Home", Active = true, MetaTitle = "Boot Project", ParentId = 0, Title = "Start", Url = "" };
+                TransactionSave<Page>(page);
+
+                var s = new Settings { Id = 1, Title = "Boot Project", FooterText = "(c) All rights reserved Boot Project " + string.Empty.GetDomain()  };
+                TransactionSave<Settings>(s);
+            }
+            catch (Exception ex)
+            {
+                log.Debug(ex.InnerException);
+            }
         }
 
+
+
+        public Content GetContent(Int32 id, Int32 pageId)
+        {
+            return Contents.SingleOrDefault(c => c.Id == id && c.PageId==pageId);
+        }
+
+
+
+        public List<Content> Contents
+        {
+            get { return Session.All<Content>(); }
+        }
+
+
+        public void CreateContent()
+        {
+
+            using (var session = SessionHostFactory.With<Content>().OpenSession())
+            {
+                if (session.QueryOver<Content>().RowCount() == 0)
+                {
+                    var content1 = new Content { Id = 1, PageId = 1, Title = "Boot Multitenancy", Html = "<p class='lead'>Read our guidelines at our development website bitbucket. There's a lot of valueable information when using this project in your application.</p>" };
+                    var content2 = new Content { Id = 2, PageId = 1, Title = "Getting started", Html = "<p>Visit Bitbucket to learn how to get started, and read information about this and other project in this serie.</p>" };
+                    var content3 = new Content { Id = 3, PageId = 1, Title = "Get more libraries", Html = "<p>Visit the developers site where you can download several project.</p>" };
+                    var content4 = new Content { Id = 4, PageId = 1, Title = "About Boot Project", Html = "<p>Boot Project is a project for developing and enhance content management systems. Project are built as their own solutions and can be deployed into any application.</p>" };
+
+                    session.WithTransaction(s => { s.Save(content1); });
+                    session.WithTransaction(s => { s.Save(content2); });
+                    session.WithTransaction(s => { s.Save(content3); });
+                    session.WithTransaction(s => { s.Save(content4); });
+                    session.Flush();
+                }
+            }
+        }
        
 
         /// <summary>
         /// Demonstrates the use of With<T>.
-        /// In this case it uses a real transaction to perform the Save extension.
+        /// In this case it uses a real transaction to perform the Save 
         /// A wrapper for save with transaction.
         /// Inserts a new object if theres no object created before.
         /// </summary>

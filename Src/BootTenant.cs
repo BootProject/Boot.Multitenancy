@@ -85,9 +85,9 @@ namespace Boot.Multitenancy
                 .ToList()
                 .ForEach(a =>
                 {   //Ignore other assemblies since we haven't created any Entity's in them. (MSCoreLib makes load fail)
-                    if (a.FullName.StartsWith(Namespace))
+                    if (a.FullName.StartsWith("Boot"))
                     {
-                        fmc.AutoMappings.Add(AutoMap.Assembly(a)
+                        fmc.AutoMappings.Add(AutoMap.Assembly(a).AddMappingsFromAssembly(a)
                             .OverrideAll(p => p.SkipProperty(typeof(NoProperty)))
                             .Where(IsEntity));
                     }
