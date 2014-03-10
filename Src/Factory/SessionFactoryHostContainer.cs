@@ -73,7 +73,7 @@ namespace Boot.Multitenancy
         {
             lock (Lock)
             {
-                if (Current.SessionFactories.ContainsKey(key).IsNotAny()) { 
+                if (Current.SessionFactories.ContainsKey(key).Equals(false)) { 
                     Current.SessionFactories.Add(key, 
                         new SessionFactoryData{ 
                             Key = key, 

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using NHibernate;
 using Boot.Multitenancy.Extensions;
+using log4net;
+using System.Reflection;
 
 namespace WebApplication1.Models
 {
@@ -13,6 +15,8 @@ namespace WebApplication1.Models
     //testmodel
     public class PageViewModel
     {
+        private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public ISession Conn { get; set; }
 
         public PageViewModel()
@@ -24,6 +28,8 @@ namespace WebApplication1.Models
 
             Settings = Conn.Get<Settings>(1);
             Page = Conn.Get<Page>(1);
+
+            //this.log.Debug("Created settings");
         }
 
         public Page Page

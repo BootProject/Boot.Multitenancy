@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using FluentNHibernate.Conventions;
 using Boot.Multitenancy.Extensions;
 using Boot.Multitenancy.Configuration;
 using Conf = Boot.Multitenancy;
@@ -19,7 +20,7 @@ namespace Boot.Multitenancy
     /// </summary>
     public static class BootHost
     {
-
+        
 
         /// <summary>
         /// A lazy init of Boot.Multitenancy
@@ -63,15 +64,16 @@ namespace Boot.Multitenancy
         private static void InitConfiguration()
         {
             using (var session = SessionFactoryHostContainer.Current) { //Init SessionFactoryContainer and add our database connections.
+              
                 (from configuration in Databases
                     select configuration)
                         .ToList()
                             .ForEach(database => {
-                                session.Add(database.Name, 
-                                    new BootTenant(Con.CreateConnectionstring(database.DbType, database.Name))
-                                      .Create(),
-                                      database.DomainList
-                                    );
+                                    session.Add(database.Name, 
+                                        new BootTenant(Con.CreateConnectionstring(database.DbType, database.Name))
+                                          .Create(),
+                                          database.DomainList
+                                        );
                              }
                         
                 );
