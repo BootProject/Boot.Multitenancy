@@ -5,6 +5,9 @@ using FluentNHibernate.Conventions;
 using NHibernate;
 using System;
 using System.Text;
+using NHibernate.Proxy.DynamicProxy;
+using Boot.Multitenancy.Proxy;
+using System.ComponentModel;
 
 namespace Boot.Multitenancy
 {
@@ -32,6 +35,15 @@ namespace Boot.Multitenancy
         static SessionFactoryHostContainer()
         {
             lock (Lock) {
+
+                ProxyFactory factory = new ProxyFactory();
+
+
+
+
+
+            //proxy = session.SessionFactory.GetClassMetadata(entityType).SetIdentifier(proxy, id, entityMode);
+
                 Current = new SessionFactoryHostContainer();
             }
         }

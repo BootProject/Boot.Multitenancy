@@ -9,12 +9,10 @@ using Boot.Multitenancy.Extensions;
 using log4net;
 using System.Reflection;
 using FluentNHibernate.Mapping;
-
-
+using Boot.Multitenancy.Infrastructure;
 
 namespace WebApplication1.Models
 {
-
     //testmodel
     public class PageViewModel
     {
@@ -91,13 +89,12 @@ namespace WebApplication1.Models
 
         public void CreateContent()
         {
-
             using (var session = SessionHostFactory.With<Content>().OpenSession())
             {
                 if (session.QueryOver<Content>().RowCount() == 0)
                 {
-                    var content1 = new Content { Id = 1, PageId = 1, Title = "Boot Multitenancy", Html = "<p class='lead'>Read our guidelines at our development website bitbucket. There's a lot of valueable information when using this project in your application.</p>" };
-                    var content2 = new Content { Id = 2, PageId = 1, Title = "Getting started", Html = "<p>Visit Bitbucket to learn how to get started, and read information about this and other project in this serie.</p>" };
+                    var content1 = new Content { Id = 1, PageId = 1, Title = "Boot Multitenancy", Html = "<p class='lead'>Read our guidelines at our development website at bitbucket. There's a lot of valueable information when using this project in your application.</p>" };
+                    var content2 = new Content { Id = 2, PageId = 1, Title = "Getting started", Html = "<p>Visit Bitbucket to learn how to get started, and read information about this and other project in this series.</p>" };
                     var content3 = new Content { Id = 3, PageId = 1, Title = "Get more libraries", Html = "<p>Visit the developers site where you can download several project.</p>" };
                     var content4 = new Content { Id = 4, PageId = 1, Title = "About Boot Project", Html = "<p>Boot Project is a project for developing and enhance content management systems. Project are built as their own solutions and can be deployed into any application.</p>" };
 

@@ -82,6 +82,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Factory\SessionFactory.cs" />
     <Compile Include="Factory\SessionFactoryContainer.cs" />
+    <Compile Include="Proxy\ProxyInterceptor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Schema\Boot.Multitenancy.xsd">

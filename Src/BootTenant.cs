@@ -46,6 +46,7 @@ namespace Boot.Multitenancy
                   .Mappings(MapAssemblies)
                   .ExposeConfiguration(BuildSchema)
                   .ExposeConfiguration(ValidateSchema)
+                  .BuildConfiguration() //Do I really need to build it here??? 
                   .BuildSessionFactory();
         }
 

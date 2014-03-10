@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Linq;
 using NHibernate;
 using NHibernate.Linq;
+using System.ComponentModel;
 
 namespace Boot.Multitenancy.Extensions
 {
