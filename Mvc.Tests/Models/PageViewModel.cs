@@ -17,19 +17,16 @@ namespace WebApplication1.Models
     {
         private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public ISession Conn { get; set; }
+        public ISession Session { get; set; }
 
         public PageViewModel()
         {
-            Conn = SessionFactoryHostContainer.CurrentFactory.OpenSession();
-            
-            InsertPage();
-            CreateSettings();
+            Session = SessionFactoryHostContainer.CurrentFactory.OpenSession();
 
-            Settings = Conn.Get<Settings>(1);
-            Page = Conn.Get<Page>(1);
+            CreateDefaults();
+            Settings = Session.Get<Settings>(1);
+            Page = Session.Get<Page>(1);
 
-            //this.log.Debug("Created settings");
         }
 
         public Page Page
@@ -48,47 +45,41 @@ namespace WebApplication1.Models
         {
             get
             {
-                return Conn.All<Page>();
+                return Session.All<Page>();
             }
         }
 
-        public void GetEl()
+
+        /// <summary>
+        /// Create some default in database. 
+        /// </summary>
+        public void CreateDefaults()
         {
-            using (var session = SessionFactory.With<Page>().OpenSession())
-            {
-                session.BeginTransaction();
-            }
+            var s = new Settings { Id = 1, Title = "Boot Project", FooterText = "(c) All rights reserved Boot Project" };
+            TransactionSave<Settings>(s);
+
+            var page = new Page() { Id = 1, Action = "Index", Controller = "Home", Active = true, MetaTitle = "Boot Project", ParentId = 0, Title = "Start", Url = "" };
+            TransactionSave<Page>(page);
         }
 
-        public void CreateSettings()
-        {
-            if (Conn.QueryOver<Settings>().RowCount() == 0)
-            {
-                var s = new Settings { Id = 1, Title = "Boot Project", FooterText = "(c) All rights reserved Boot Project" };
-                Conn.Save(s);
-                Conn.Flush();
-            }
-        }
+       
 
-        //Create first page
-        public void InsertPage()
+        /// <summary>
+        /// Demonstrates the use of With<T>.
+        /// In this case it uses a real transaction to perform the Save extension.
+        /// A wrapper for save with transaction.
+        /// Inserts a new object if theres no object created before.
+        /// </summary>
+        /// <typeparam name="T">Type to save</typeparam>
+        /// <param name="t">The new object to save</param>
+        public void TransactionSave<T>(T t) where T : class
         {
-            if (Conn.QueryOver<Page>().RowCount() == 0)
+            using (var session = SessionHostFactory.With<T>().OpenSession()) 
             {
-                Page p = new Page()
-                {
-                    Id = 1,
-                    Action = "Index",
-                    Controller = "Home",
-                    Active = true,
-                    MetaTitle = "Boot Project",
-                    ParentId = 0,
-                    Title = "Start",
-                    Url = ""
-                };
-                Conn.Save<Page>(p);
-                Conn.Flush();
-            } 
+                if (session.QueryOver<T>().RowCount() == 0) {
+                    session.WithTransaction(s => { s.Save(t); });
+                }
+            }
         }
     }
 }

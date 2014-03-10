@@ -72,6 +72,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Factory\SessionFactoryData.cs" />
     <Compile Include="Factory\SessionFactoryHostContainer.cs" />
+    <Compile Include="Factory\SessionHostFactory.cs" />
     <Compile Include="Filters\DomainLevelAttribute.cs" />
     <Compile Include="Filters\Extensions\FluentIgnore.cs" />
     <Compile Include="Filters\NoEntity.cs" />

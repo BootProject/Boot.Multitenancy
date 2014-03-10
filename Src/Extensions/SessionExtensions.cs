@@ -285,7 +285,7 @@ namespace Boot.Multitenancy.Extensions
         /// <param name="session"></param>
         /// <param name="unitsOfWork"></param>
         /// <returns></returns>
-        public static ISession DoWithTransaction(this ISession session, Action<ISession> unitsOfWork)
+        public static ISession WithTransaction(this ISession session, Action<ISession> unitsOfWork)
         {
             session.BeginTransaction();
 

@@ -31,7 +31,7 @@ namespace WebApplication1
                             new SqlCeEngine(d.Connectionstring).CreateDatabase();
                         } catch (Exception ex)
                         {
-                            log.Debug("Global application Exception SqlCe", ex);
+                            log.Debug(ex.Message, ex);
                         }
                     });
 
