@@ -38,7 +38,7 @@ namespace Boot.Multitenancy.Configuration
 
 
         /// <summary>
-        /// The namespace to look for IEntity.
+        /// The namespace of yours, to look for IEntity's in.
         /// </summary>
         [ConfigurationProperty("namespace", IsRequired=true)]
         public string Namespace

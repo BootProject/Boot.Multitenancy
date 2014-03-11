@@ -14,7 +14,7 @@ namespace Boot.Multitenancy
     /// <summary>
     /// Contains methods to read multiple domains from a single SessionFactory object.
     /// </summary>
-    public class SessionFactoryHostContainer : IDisposable
+    public class SessionFactoryHostContainer //: IDisposable
     {
 
 
@@ -35,15 +35,6 @@ namespace Boot.Multitenancy
         static SessionFactoryHostContainer()
         {
             lock (Lock) {
-
-                ProxyFactory factory = new ProxyFactory();
-
-
-
-
-
-            //proxy = session.SessionFactory.GetClassMetadata(entityType).SetIdentifier(proxy, id, entityMode);
-
                 Current = new SessionFactoryHostContainer();
             }
         }
@@ -107,12 +98,5 @@ namespace Boot.Multitenancy
             SessionFactories = new Dictionary<string, SessionFactoryData>();
         }
 
-
-
-
-        /// <summary>
-        /// Dispose
-        /// </summary>
-        public void Dispose() { }
     }
 }

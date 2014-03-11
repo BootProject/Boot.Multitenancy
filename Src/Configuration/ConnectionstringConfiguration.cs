@@ -19,7 +19,8 @@ namespace Boot.Multitenancy.Configuration
     {
 
         //SqlCe
-        static readonly string SqlCeConnectionstring = "Data Source=|DataDirectory|{0}.sdf;Persist Security Info=False;";
+        static readonly string SqlCeConnectionstring = "Data Source=|DataDirectory|{0}.sdf;Persist Security Info=False;"; //test only
+        static readonly string MySqlConnectionstring = "Server=127.0.0.1;Port=3306;Database={0};Uid=boots;Pwd=boots;"; //test only
       
 
 
@@ -38,7 +39,7 @@ namespace Boot.Multitenancy.Configuration
                 case DbType.SqlServer2008:
                     return string.Empty;
                 case DbType.MySql5:
-                    return string.Empty;
+                    return string.Format(MySqlConnectionstring, key);
                 default:
                     return string.Empty;
             }

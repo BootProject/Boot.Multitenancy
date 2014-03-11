@@ -5,10 +5,13 @@ using Boot.Multitenancy.Infrastructure;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using log4net;
 using NHibernate.Tool.hbm2ddl;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Configuration;
@@ -18,7 +21,9 @@ namespace Boot.Multitenancy
     public class BootTenant : ISessionFactoryCreator
     {
 
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static string Connectionstring { get; set; }
+        private static DbType DbType { get; set; }
 
 
 
@@ -26,9 +31,10 @@ namespace Boot.Multitenancy
         /// Init a new Tenant with a connectionstring.
         /// </summary>
         /// <param name="connectionstring">Database connectionstring</param>
-        public BootTenant(string connectionstring)
+        public BootTenant(string connectionstring, DbType dbtype)
         {
             Connectionstring = connectionstring;
+            DbType = dbtype;
         }
 
 
@@ -40,16 +46,16 @@ namespace Boot.Multitenancy
         /// <returns>ISessionFactory</returns>
         public NHibernate.ISessionFactory Create()
         {
+            log.Debug("ISessionFactory Create() Start");
+
             return Fluently
                   .Configure()
                   .Database(DatabaseConfiguration)
                   .Mappings(MapAssemblies)
                   .ExposeConfiguration(BuildSchema)
                   .ExposeConfiguration(ValidateSchema)
-                  .BuildConfiguration() //Do I really need to build it here??? 
                   .BuildSessionFactory();
         }
-
 
 
 
@@ -59,7 +65,6 @@ namespace Boot.Multitenancy
         private static string Namespace
         {
             get {
-                    
                     var conf = WebConfigurationManager
                             .GetSection("sessionFactoryConfiguration") 
                                     as SessionFactoryConfiguration;
@@ -72,7 +77,6 @@ namespace Boot.Multitenancy
 
 
 
-
         /// <summary>
         ///     Maps all Entities in bin folder.
         /// </summary>
@@ -82,16 +86,16 @@ namespace Boot.Multitenancy
             (from a in AppDomain.CurrentDomain.GetAssemblies()
              select a
                  into assemblies
-                 select assemblies)
+                 select assemblies).Where(f => f.FullName.StartsWith("Boot"))
                 .ToList()
                 .ForEach(a =>
                 {   //Ignore other assemblies since we haven't created any Entity's in them. (MSCoreLib makes load fail)
-                    if (a.FullName.StartsWith("Boot"))
-                    {
-                        fmc.AutoMappings.Add(AutoMap.Assembly(a).AddMappingsFromAssembly(a)
-                            .OverrideAll(p => p.SkipProperty(typeof(NoProperty)))
-                            .Where(IsEntity));
-                    }
+                    //if (a.FullName.StartsWith("Boot"))
+                    //{
+                        fmc.AutoMappings.Add(AutoMap.Assembly(a)
+                        .OverrideAll(p => p.SkipProperty(typeof(NoProperty)))
+                        .Where(IsEntity));
+                    //}
                 });
         }
 
@@ -117,12 +121,21 @@ namespace Boot.Multitenancy
         /// <returns>IPersistenceConfigurer configuration</returns>
         private static IPersistenceConfigurer DatabaseConfiguration()
         {
-
-            //TODO: Select custom provider
-            return MsSqlCeConfiguration.MsSqlCe40
-                .UseOuterJoin()
-                .ConnectionString(Connectionstring)
-                .ShowSql();
+            switch (DbType)
+            {
+                case DbType.MySql5:
+                    return MySQLConfiguration.Standard
+                            .UseOuterJoin()
+                            .ConnectionString(Connectionstring)
+                            .ShowSql();
+                case DbType.SqlCe:
+                    return MsSqlCeConfiguration.MsSqlCe40
+                            .UseOuterJoin()
+                            .ConnectionString(Connectionstring)
+                            .ShowSql();
+                default:
+                    return null;
+            }
         }
 
 
@@ -131,10 +144,11 @@ namespace Boot.Multitenancy
         /// <summary>
         ///     Validates nHibernate schema
         /// </summary>
-        /// <param name="config">Configuration config</param>
+        /// <param name="config">NHibernate.Cfg.Configuration</param>
         private static void ValidateSchema(NHibernate.Cfg.Configuration config)
         {
             var check = new SchemaValidator(config);
+            log.Debug("ISessionFactory Create() End");
         }
 
 
@@ -143,14 +157,18 @@ namespace Boot.Multitenancy
 
         /// <summary>
         ///     Creates or build the current database.
+        ///     Creates a file in App_Data, FluentConfiguration.xml.
         /// </summary>
-        /// <param name="config"></param>
+        /// <param name="config">NHibernate.Cfg.Configuration</param>
         private static void BuildSchema(NHibernate.Cfg.Configuration config)
         {
             SchemaMetadataUpdater.QuoteTableAndColumns(config);
+            string path = AppDomain.CurrentDomain.GetData("DataDirectory") + "\\FluentConfiguration.xml";
+            new SchemaExport(config)
+                .SetDelimiter(";")
+                .SetOutputFile(path)
+                .Create(false, false);
             new SchemaUpdate(config).Execute(false, true);
-     
         }
-
     }
 }

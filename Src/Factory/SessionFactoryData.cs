@@ -11,7 +11,7 @@ namespace Boot.Multitenancy
     /// <summary>
     /// Holder of a ISessionFactory and the associated domains.
     /// </summary>
-    internal class SessionFactoryData : IDisposable
+    internal class SessionFactoryData 
     {
 
 
@@ -39,17 +39,12 @@ namespace Boot.Multitenancy
 
 
 
-
         /// <summary>
         /// Init a new SessionFactoryData Object.
         /// </summary>
         public SessionFactoryData() { 
             DnsRecords = new List<string>(); 
         }
-        
-
-
-
-        public void Dispose() { }
+       
     }
 }

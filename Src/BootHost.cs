@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using FluentNHibernate.Conventions;
 using Boot.Multitenancy.Extensions;
 using Boot.Multitenancy.Configuration;
 using Conf = Boot.Multitenancy;
+using System.Reflection;
+using System.IO;
+using log4net;
 using Con = Boot.Multitenancy.Configuration.ConnectionstringConfiguration;
 
 namespace Boot.Multitenancy
@@ -20,7 +22,7 @@ namespace Boot.Multitenancy
     /// </summary>
     public static class BootHost
     {
-        
+
 
         /// <summary>
         /// A lazy init of Boot.Multitenancy
@@ -28,8 +30,23 @@ namespace Boot.Multitenancy
         /// </summary>
         public static void Init()
         {
-            if (CreateEnvironment()) //If the configuration is set to false, we dont continue.
+            if (CreateEnvironment()){
                 InitConfiguration();
+                SetGlobalConfiguration();
+            }
+        }
+
+
+
+        /// <summary>
+        /// Creates ActionFilter.
+        /// </summary>
+        private static void SetGlobalConfiguration()
+        {
+            System.Web.Http.GlobalConfiguration
+                .Configuration
+                    .Filters
+                        .Add(new Boot.Multitenancy.Filter.SessionFactoryAttribute());
         }
 
 
@@ -49,7 +66,8 @@ namespace Boot.Multitenancy
                             connectionElements.Add(
                                 new ConnectionElement {
                                     Name = database.Name,
-                                    Connectionstring = Con.CreateConnectionstring(database.DbType, database.Name) 
+                                    Connectionstring = Con.CreateConnectionstring(database.DbType, database.Name),
+                                    DbType = database.DbType  
                                 });
                         });
 
@@ -59,25 +77,24 @@ namespace Boot.Multitenancy
 
 
         /// <summary>
-        /// Creates instance of databases.
+        ///  Creates instance of databases.
         /// </summary>
         private static void InitConfiguration()
         {
-            using (var session = SessionFactoryHostContainer.Current) { //Init SessionFactoryContainer and add our database connections.
+            var session = SessionFactoryHostContainer.Current;
               
                 (from configuration in Databases
                     select configuration)
                         .ToList()
                             .ForEach(database => {
-                                    session.Add(database.Name, 
-                                        new BootTenant(Con.CreateConnectionstring(database.DbType, database.Name))
-                                          .Create(),
-                                          database.DomainList
-                                        );
+                                session.Add(database.Name, 
+                                    new BootTenant(Con.CreateConnectionstring(database.DbType, database.Name), database.DbType)
+                                        .Create(),
+                                        database.DomainList
+                                    );
                              }
                         
                 );
-            }
         }
 
 

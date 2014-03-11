@@ -28,7 +28,7 @@ namespace WebApplication1
             try { 
                 var f = new FileInfo(AppDomain.CurrentDomain.GetData("DataDirectory") + "\\BootLogger.log");
                 var fileStream = f.OpenWrite();
-                fileStream.SetLength(0);
+                fileStream.SetLength(0); //Delete content on each startup.
                 fileStream.Close();
             }
             catch { }

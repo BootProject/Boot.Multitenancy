@@ -12,7 +12,7 @@ namespace Boot.Multitenancy
     /// Creates SessionFactories
     /// Usally used when static databases are used.
     /// </summary>
-    public class SessionFactoryContainer : IDisposable
+    public class SessionFactoryContainer
     {
 
 
@@ -29,7 +29,7 @@ namespace Boot.Multitenancy
 
 
 
-        //Init
+        //Static Ctor
         static SessionFactoryContainer()
         {
             lock (Lock)
@@ -108,8 +108,5 @@ namespace Boot.Multitenancy
         {
             SessionFactories = new Dictionary<string, ISessionFactory>();
         }
-
-
-        public void Dispose() { }
     }
 }

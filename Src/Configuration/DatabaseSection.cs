@@ -99,7 +99,7 @@ namespace Boot.Multitenancy.Configuration
 
 
         /// <summary>
-        /// A list of domains.
+        /// Helper. A list of domains.
         /// </summary>
         public List<string> DomainList
         {

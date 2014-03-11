@@ -14,7 +14,6 @@ namespace Boot.Multitenancy.Extensions
     public static class SessionExtensions
     {
 
-
         /// <summary>
         /// WorkWrapper. Extensions for ISession.
         /// </summary>

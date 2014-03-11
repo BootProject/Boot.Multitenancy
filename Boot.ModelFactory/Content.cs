@@ -20,8 +20,10 @@ namespace Boot.ModelFactory
         public ContentMap()
         {
             Id(x => x.Id)
+               .Unique()
                .Column("Id")
-               .GeneratedBy.Assigned()
+               .Not.Nullable()
+               .GeneratedBy.Identity()
                .CustomType<Int32>();
             Map(p => p.PageId);
             Map(p => p.Title);

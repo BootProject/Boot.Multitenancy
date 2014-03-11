@@ -38,7 +38,11 @@ namespace Boot.Multitenancy.Extensions
 
 
 
-
+        /// <summary>
+        /// Get the current domain
+        /// </summary>
+        /// <param name="s">String to get domain from.</param>
+        /// <returns>The current doamin.</returns>
         public static string GetDomain(this string s)
         {
             return new Uri(HttpContext.Current.Request.Url.ToString()) //No need to throw exception here if not found.
@@ -49,6 +53,7 @@ namespace Boot.Multitenancy.Extensions
                     ~UriComponents.Scheme,
                     UriFormat.UriEscaped);
         }
+
 
 
         /// <summary>
@@ -63,6 +68,7 @@ namespace Boot.Multitenancy.Extensions
         }
 
 
+
         /// <summary>
         /// Ensure that domain is in it's base form.
         /// </summary>
@@ -72,6 +78,7 @@ namespace Boot.Multitenancy.Extensions
         {
             return s.Replace("www.", string.Empty);
         }
+
 
 
         /// <summary>

@@ -24,8 +24,10 @@ namespace Boot.ModelFactory
         public PageMap()
         {
             Id(x => x.Id)
+               .Unique()
                .Column("Id")
-               .GeneratedBy.Assigned()
+               .Not.Nullable()
+               .GeneratedBy.Identity()
                .CustomType<Int32>();
             Map(p => p.Title);
             Map(p => p.Url);

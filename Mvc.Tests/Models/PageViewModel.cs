@@ -13,7 +13,6 @@ using Boot.Multitenancy.Infrastructure;
 
 namespace WebApplication1.Models
 {
-    //testmodel
     public class PageViewModel
     {
         private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -25,9 +24,17 @@ namespace WebApplication1.Models
             Session = SessionFactoryHostContainer.CurrentFactory.OpenSession();
 
             CreateDefaults();
-            Settings = Session.Get<Settings>(1);
+            
             Page = Session.Get<Page>(1);
+            Title = Page.Title;
+            Settings = Session.Get<Settings>(1);
 
+        }
+
+        public string Title
+        {
+            get;
+            set;
         }
 
 
@@ -68,7 +75,7 @@ namespace WebApplication1.Models
             }
             catch (Exception ex)
             {
-                log.Debug(ex.InnerException);
+               // log.Debug(ex.InnerException);
             }
         }
 
@@ -102,7 +109,6 @@ namespace WebApplication1.Models
                     session.WithTransaction(s => { s.Save(content2); });
                     session.WithTransaction(s => { s.Save(content3); });
                     session.WithTransaction(s => { s.Save(content4); });
-                    session.Flush();
                 }
             }
         }
