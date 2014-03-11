@@ -1,0 +1,34 @@
+
+    drop table if exists `Content`;
+
+    drop table if exists `Page`;
+
+    drop table if exists `Settings`;
+
+    create table `Content` (
+        Id INTEGER NOT NULL AUTO_INCREMENT,
+       PageId INTEGER,
+       Title VARCHAR(255),
+       Html VARCHAR(255),
+       Zone VARCHAR(255),
+       primary key (Id)
+    );
+
+    create table `Page` (
+        Id INTEGER NOT NULL AUTO_INCREMENT,
+       ParentId INTEGER,
+       Title VARCHAR(255),
+       Url VARCHAR(255),
+       MetaTitle VARCHAR(255),
+       Controller VARCHAR(255),
+       Action VARCHAR(255),
+       Active TINYINT(1),
+       primary key (Id)
+    );
+
+    create table `Settings` (
+        Id INTEGER NOT NULL AUTO_INCREMENT,
+       Title VARCHAR(255),
+       FooterText VARCHAR(255),
+       primary key (Id)
+    );
