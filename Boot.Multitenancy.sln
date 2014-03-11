@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1F4325
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mvc5TestProject", "Mvc5TestProject", "{C4A0E174-F09C-4B80-8E63-4F340CA5E9A4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{C4A0E174-F09C-4B80-8E63-4F340CA5E9A4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solution Items", "{9CCDD7C5-6880-442A-B30E-83FB40E0014C}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solutio
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc.Tests", "Mvc.Tests\Mvc.Tests.csproj", "{16EF3C4F-16C0-429F-A436-338D03C4FB7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boot.Web", "Boot.Web\Boot.Web.csproj", "{16EF3C4F-16C0-429F-A436-338D03C4FB7F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boot.ModelFactory", "Boot.ModelFactory\Boot.ModelFactory.csproj", "{56FBAC30-8D77-4D23-884F-06EC65CEA6EA}"
 EndProject

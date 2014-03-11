@@ -149,7 +149,6 @@ namespace Boot.Multitenancy
 
 
 
-
         /// <summary>
         ///     Creates or build the current database.
         ///     Creates a file in App_Data, FluentConfiguration.xml.

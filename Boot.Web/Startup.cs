@@ -5,8 +5,8 @@ using System;
 using System.IO;
 using System.Reflection;
 
-[assembly: OwinStartupAttribute(typeof(WebApplication1.Startup))]
-namespace WebApplication1
+[assembly: OwinStartupAttribute(typeof(Boot.Startup))]
+namespace Boot
 {
     public partial class Startup
     {
@@ -16,7 +16,6 @@ namespace WebApplication1
         {
             log.Clear();
             log4net.Config.XmlConfigurator.Configure();
-
             ConfigureAuth(app);
         }
     }

@@ -11,7 +11,7 @@ using log4net;
 using System.Reflection;
 using Host = Boot.Multitenancy.BootHost;
 
-namespace WebApplication1
+namespace Boot
 {
     public static class BootHostWrapper
     {

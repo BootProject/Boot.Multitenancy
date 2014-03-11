@@ -13,7 +13,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 
 
-namespace WebApplication1
+namespace Boot
 {
     public class MvcApplication : System.Web.HttpApplication
     {

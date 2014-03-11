@@ -16,6 +16,7 @@ textarea {
     max-width: 280px;
 }
 
+
 /* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;
@@ -39,4 +40,8 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+}
+
+.jumbotron h1{
+    letter-spacing: -3px !important;
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Boot.ModelFactory;
-using WebApplication1.Models;
+using Boot.Models;
 
-namespace WebApplication1.Controllers
+namespace Boot.Controllers
 {
     public class HomeController : Controller
     {

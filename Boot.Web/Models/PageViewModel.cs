@@ -11,7 +11,7 @@ using System.Reflection;
 using FluentNHibernate.Mapping;
 using Boot.Multitenancy.Infrastructure;
 
-namespace WebApplication1.Models
+namespace Boot.Models
 {
     public class PageViewModel
     {

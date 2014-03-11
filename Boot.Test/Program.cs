@@ -13,6 +13,7 @@ namespace Boot.Test
         {
             try 
             {
+                    //Test connect to MySql.
                     var con = new MySqlConnection();
                     con.ConnectionString = "Server=localhost;Port=3306;Uid=boots;Pwd=boots;";
                     con.Open(); 
