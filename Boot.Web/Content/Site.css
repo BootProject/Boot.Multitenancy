@@ -42,6 +42,9 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
-.jumbotron h1{
+.jumbotron h2{
+
+    font-size: 52px;
     letter-spacing: -3px !important;
+    line-height: 30px;
 }

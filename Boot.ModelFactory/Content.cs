@@ -13,6 +13,7 @@ namespace Boot.ModelFactory
         public virtual Int32 PageId { get; set; }
         public virtual string Title { get; set; }
         public virtual string Html { get; set; }
+        public virtual Region Zone { get; set; }
     }
 
     public class ContentMap : Entity<Content>
@@ -28,6 +29,8 @@ namespace Boot.ModelFactory
             Map(p => p.PageId);
             Map(p => p.Title);
             Map(p => p.Html);
+            Map(p => p.Zone)
+                .CustomType<Int32>();
         }
     }
 }

@@ -47,10 +47,10 @@ namespace Boot.Models
 
         #region Helpers
 
-        public static dynamic Zone(int c, int p)
+        public static dynamic Zone(Region zone)
         {
             dynamic model = Html.ViewDataContainer.ViewData.Model;
-            return HtmlHelperExtensions.Zone(Html, model, c, p);
+            return HtmlHelperExtensions.Zone(Html, model, zone);
         }
 
        
