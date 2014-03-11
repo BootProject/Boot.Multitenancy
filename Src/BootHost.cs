@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 using FluentNHibernate.Conventions;
 using Boot.Multitenancy.Extensions;
 using Boot.Multitenancy.Configuration;
-using Conf = Boot.Multitenancy;
 using System.Reflection;
 using System.IO;
-using log4net;
+using Conf = Boot.Multitenancy;
 using Con = Boot.Multitenancy.Configuration.ConnectionstringConfiguration;
 
 namespace Boot.Multitenancy

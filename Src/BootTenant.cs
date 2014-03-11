@@ -5,7 +5,6 @@ using Boot.Multitenancy.Infrastructure;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using log4net;
 using NHibernate.Tool.hbm2ddl;
 using System;
 using System.Collections.Generic;
@@ -21,7 +20,6 @@ namespace Boot.Multitenancy
     public class BootTenant : ISessionFactoryCreator
     {
 
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static string Connectionstring { get; set; }
         private static DbType DbType { get; set; }
 
@@ -46,8 +44,6 @@ namespace Boot.Multitenancy
         /// <returns>ISessionFactory</returns>
         public NHibernate.ISessionFactory Create()
         {
-            log.Debug("ISessionFactory Create() Start");
-
             return Fluently
                   .Configure()
                   .Database(DatabaseConfiguration)
@@ -148,7 +144,6 @@ namespace Boot.Multitenancy
         private static void ValidateSchema(NHibernate.Cfg.Configuration config)
         {
             var check = new SchemaValidator(config);
-            log.Debug("ISessionFactory Create() End");
         }
 
 
