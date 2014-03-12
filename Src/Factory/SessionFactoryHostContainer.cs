@@ -17,7 +17,6 @@ namespace Boot.Multitenancy
     public class SessionFactoryHostContainer //: IDisposable
     {
 
-
         /// <summary>
         /// The current SessionFactoryHostContainer.
         /// </summary>
@@ -28,6 +27,12 @@ namespace Boot.Multitenancy
         private static readonly object Lock = new object();
         internal Dictionary<string, SessionFactoryData> SessionFactories { get; set; }
 
+
+
+        /// <summary>
+        /// Tests
+        /// </summary>
+        /// <returns></returns>
         public static List<SessionFactoryData> GetAll()
         {
             List<SessionFactoryData> list = new List<SessionFactoryData>();

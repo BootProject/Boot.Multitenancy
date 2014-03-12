@@ -30,7 +30,6 @@ namespace Boot
                             }
 
                             if (d.DbType == DbType.MySql5) {
-
                                 var con = new MySqlConnection();
                                 con.ConnectionString = "Server=localhost;Port=3306;Uid=boots;Pwd=boots;";
                                 con.Open(); 

@@ -9,7 +9,7 @@
         Id INTEGER NOT NULL AUTO_INCREMENT,
        PageId INTEGER,
        Title TEXT,
-       Html TEXT,
+       Html TEXT, //Correct
        Zone VARCHAR(255),
        primary key (Id)
     );

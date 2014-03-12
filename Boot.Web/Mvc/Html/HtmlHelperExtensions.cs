@@ -27,26 +27,62 @@ namespace Boot.Mvc.Html
         /// <returns>A rendered Mvc object</returns>
         public static IHtmlString Zone(this HtmlHelper html, dynamic model, Region zone)
         {
-            //Single output. In normal we iterate all widgets. Just for testing.
             try { 
-            var sb = new StringBuilder();
-            var datamodel = (Models.PageViewModel)model;
 
-            if (datamodel.Contents.Any()) {
-                Content contents = datamodel.Contents.Where(d => d.Zone == zone && d.PageId==1).Single();
+                var sb = new StringBuilder();
+                var viewmodel = (Models.PageViewModel)model;
+                var current = Current(model);
+                var contents = viewmodel.Contents.FindAll(d => d.PageId==current.Id);
 
-                if (zone.ToString() == contents.Zone.ToString()) {
-                    sb.Append(RenderWidget(html, "~/Views/Widgets/Content.cshtml", contents));
+                foreach (var item in contents) //MySql saves enum as string... strange!!
+                { 
+                    if (item.Zone.ToString() == zone.ToString()) {
+                        sb.Append(RenderWidget(html, "~/Views/Widgets/Content.cshtml", item));
+                    }
                 }
+
                 if (sb.ToString().Length > 0)
                     return new HtmlString(sb.ToString());
 
-                }
+                
             }catch(Exception ex){
                 log.Debug(ex.Message);
             }
 
             return new HtmlString("&nbsp;");
+        }
+
+        public static Page Current(dynamic model)
+        {
+            var viewmodel = (Models.PageViewModel)model;
+            return viewmodel.Pages.Find(p => p.Action == string.Empty.Action() && p.Controller == string.Empty.Controller());
+        }
+
+
+        public static Page Current(this Page page, dynamic model)
+        {
+            var viewmodel = (Models.PageViewModel)model;
+            return viewmodel.Pages.Find(p => p.Action == string.Empty.Action() && p.Controller == string.Empty.Controller());
+        }
+
+        public static string Controller(this string s)
+        {
+            return HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+        }
+
+        public static string Action(this string s)
+        {
+            return HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+        }
+
+        public static string HomeController(this string s)
+        {
+            return "Home";
+        }
+
+        public static string HomeAction(this string s)
+        {
+            return "Index";
         }
 
 

@@ -11,6 +11,7 @@ using System.Reflection;
 using FluentNHibernate.Mapping;
 using Boot.Multitenancy.Infrastructure;
 using System.Text;
+using Boot.Mvc.Html;
 
 namespace Boot.Models
 {
@@ -28,7 +29,7 @@ namespace Boot.Models
 
             CreateDefaults();
             
-            Page = Session.Get<Page>(1);
+            Page = Session.Get<Page>(Page.Current(this).Id);
             Title = Page.Title;
             Settings = Session.Get<Settings>(1);
             }
@@ -94,13 +95,22 @@ namespace Boot.Models
         public void CreateDefaults()
         {
             try {
-                CreateContent();
-
+                
                 var page = new Page() { Id = 1, Action = "Index", Controller = "Home", Active = true, MetaTitle = "Boot Project", ParentId = 0, Title = "Start", Url = "" };
+                TransactionSave<Page>(page);
+
+                page = new Page() { Id = 2, Action = "About", Controller = "Home", Active = true, MetaTitle = "Boot Project", ParentId = 0, Title = "Start", Url = "" };
+                TransactionSave<Page>(page);
+                
+                page = new Page() { Id = 3, Action = "Contact", Controller = "Home", Active = true, MetaTitle = "Boot Project", ParentId = 0, Title = "Start", Url = "" };
                 TransactionSave<Page>(page);
 
                 var s = new Settings { Id = 1, Title = "Boot Project", FooterText = "(c) All rights reserved Boot Project " + string.Empty.GetDomain()  };
                 TransactionSave<Settings>(s);
+
+                CreateContent();
+
+
             }
             catch (Exception ex)
             {
@@ -130,12 +140,17 @@ namespace Boot.Models
                     var content5 = new Content { Id = 5, PageId = 1, Zone = Region.AsideFirst, Title = "<h2>Multitenancy</h2>", Html = "<p>This project is an extension of nHibernate's ISessionFactory and makes it incredible easy to use multiple sessions within the same application. In BootCms it's used to define different domains and their databases. Read more There are several way of completing configuration, from code, by Host and Tenants or by web.config. Boot.Multitenancy has Fluentnhibernate built in, so no need for extra configuration except setting up databases configuration i web.config. Boot.Multitenany = By dropping in 2 lines of code and add configuration to web.config</p><blockquote class=\"blockquote-reverse\"><p>Boot.Multitenancy</p>Boot.Multitenancy configuration has it's setup in web.config. You can assign multiple domains to connect to a database. To add a database and domains, see configuration below.</blockquote>" };
                     var content6 = new Content { Id = 6, PageId = 1, Zone = Region.AsideSecond, Title = "<blockquote class=\"blockquote\"><h2>HostContainer <span class=\"label label-default\">New</span></h2>", Html = "If your \"lazy\" like I am, and want a quick and easy way of start using Multitenancy, add some configuration to web.config and you're up and running. All Fluentnhibernate configuration is built in. A default host and tenants are automatically configured. Your application can be setup to create configuration from web.config <a href=\"https://bitbucket.org/rickardmagnusson/boot.multitenancy/wiki/SessionFactoryHostContainer\" target=\"_blank\">Read this guide.</a></blockquote>" };
 
+                    var content7 = new Content { Id = 7, PageId = 2, Zone = Region.Content, Title = "<h1>About Boot Project</h1>", Html = "<p>This project is an extension of nHibernate's ISessionFactory and makes it incredible easy to use multiple sessions within the same application. In BootCms it's used to define different domains and their databases. Read more There are several way of completing configuration, from code, by Host and Tenants or by web.config. Boot.Multitenancy has Fluentnhibernate built in, so no need for extra configuration except setting up databases configuration i web.config. Boot.Multitenany = By dropping in 2 lines of code and add configuration to web.config</p><blockquote class=\"blockquote-reverse\"><p>Boot.Multitenancy</p>Boot.Multitenancy configuration has it's setup in web.config. You can assign multiple domains to connect to a database. To add a database and domains, see configuration below.</blockquote>" };
+                    var content8 = new Content { Id = 8, PageId = 3, Zone = Region.Content, Title = "<h1>Contact</h1>", Html = "<a href=\"https://bitbucket.org/rickardmagnusson/\" target=\"_blank\">Contact us at Bitbucket.</a>" };
+
                     session.WithTransaction(s => { s.Save(content1); });
                     session.WithTransaction(s => { s.Save(content2); });
                     session.WithTransaction(s => { s.Save(content3); });
                     session.WithTransaction(s => { s.Save(content4); });
                     session.WithTransaction(s => { s.Save(content5); });
                     session.WithTransaction(s => { s.Save(content6); });
+                    session.WithTransaction(s => { s.Save(content7); });
+                    session.WithTransaction(s => { s.Save(content8); });
                    
                 }
             }
