@@ -89,7 +89,8 @@ namespace Boot.Multitenancy
                                 session.Add(database.Name, 
                                     new BootTenant(Con.CreateConnectionstring(database.DbType, database.Name), database.DbType)
                                         .Create(),
-                                        database.DomainList
+                                        database.DomainList,
+                                        database.Theme
                                     );
                              }
                         

@@ -69,6 +69,7 @@
     <Compile Include="Configuration\DatabaseSection.cs" />
     <Compile Include="Configuration\DatabaseCollectionReader.cs" />
     <Compile Include="Configuration\SessionFactoryConfiguration.cs" />
+    <Compile Include="Filters\StringLength.cs" />
     <Compile Include="Infrastructure\Enumerations.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
@@ -83,6 +84,8 @@
     <Compile Include="Filters\NoProperty.cs" />
     <Compile Include="Infrastructure\IEntity.cs" />
     <Compile Include="Factory\ISessionFactoryCreator.cs" />
+    <Compile Include="Infrastructure\StringColumnLengthConvention.cs" />
+    <Compile Include="ITenant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Factory\SessionFactory.cs" />
     <Compile Include="Factory\SessionFactoryContainer.cs" />

@@ -1,18 +1,62 @@
-﻿
-<!--Templating made easy :-)-->
+﻿<!--Templating made easy :-)-->
 <div class="jumbotron">
     @Zone(Region.Header)
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        @Zone(Region.TripelFirst)
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col">
+            @Zone(Region.TripelFirst)
+            <ul class="nav nav-pills nav-stacked pull-right">
+                <li>
+                    <a href="#">
+                        <span class="badge pull-right">&raquo;</span>
+                        Read more
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4 col">
+            @Zone(Region.TripelSecond)
+            <ul class="nav nav-pills nav-stacked pull-right">
+                <li>
+                    <a href="#">
+                        <span class="badge pull-right">&raquo;</span>
+                        Read more
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4 col">
+            @Zone(Region.TripelThird)
+            <ul class="nav nav-pills nav-stacked pull-right">
+                <li>
+                    <a href="#">
+                        <span class="badge pull-right">&raquo;</span>
+                        Read more
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="col-md-4">
-        @Zone(Region.TripelSecond)
+    <br/><br/>
+    <div class="row">
+        <div class="col-md-6">
+            @Zone(Region.AsideFirst)
+        </div>
+        <div class="col-md-6">
+            @Zone(Region.AsideSecond)
+        </div>
     </div>
-    <div class="col-md-4">
-        @Zone(Region.TripelThird)
+    <div class="row">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6">
+
+        </div>
     </div>
+
 </div>
+
 <!--// Templating-->

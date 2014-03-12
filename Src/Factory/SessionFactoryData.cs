@@ -11,7 +11,8 @@ namespace Boot.Multitenancy
     /// <summary>
     /// Holder of a ISessionFactory and the associated domains.
     /// </summary>
-    internal class SessionFactoryData 
+    //internal
+    public class SessionFactoryData 
     {
 
 
@@ -45,6 +46,10 @@ namespace Boot.Multitenancy
         public SessionFactoryData() { 
             DnsRecords = new List<string>(); 
         }
+
+
+
+        public string Theme { get; set; }
        
     }
 }

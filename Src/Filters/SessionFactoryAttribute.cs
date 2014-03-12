@@ -23,6 +23,7 @@ namespace Boot.Multitenancy.Filter
         /// <param name="actionContext"></param>
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
+            throw new Exception("Does this ever happends?");
             var session = SessionFactoryHostContainer.CurrentFactory.OpenSession();
             CurrentSessionContext.Bind(session);
             session.BeginTransaction();

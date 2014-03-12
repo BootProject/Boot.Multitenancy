@@ -1,8 +1,10 @@
 ﻿using Boot.ModelFactory;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -11,6 +13,9 @@ namespace Boot.Mvc.Html
 {
     public static class HtmlHelperExtensions
     {
+
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
 
         /// <summary>
         ///  Create a Zone element.
@@ -23,15 +28,23 @@ namespace Boot.Mvc.Html
         public static IHtmlString Zone(this HtmlHelper html, dynamic model, Region zone)
         {
             //Single output. In normal we iterate all widgets. Just for testing.
+            try { 
             var sb = new StringBuilder();
             var datamodel = (Models.PageViewModel)model;
-            Content contents = datamodel.Contents.Where(d => d.Zone == zone && d.PageId==1).Single();
 
-            if (zone.ToString() == contents.Zone.ToString()) {
-                sb.Append(RenderWidget(html, "~/Views/Widgets/Content.cshtml", contents));
+            if (datamodel.Contents.Any()) {
+                Content contents = datamodel.Contents.Where(d => d.Zone == zone && d.PageId==1).Single();
+
+                if (zone.ToString() == contents.Zone.ToString()) {
+                    sb.Append(RenderWidget(html, "~/Views/Widgets/Content.cshtml", contents));
+                }
+                if (sb.ToString().Length > 0)
+                    return new HtmlString(sb.ToString());
+
+                }
+            }catch(Exception ex){
+                log.Debug(ex.Message);
             }
-            if (sb.ToString().Length > 0)
-                return new HtmlString(sb.ToString());
 
             return new HtmlString("&nbsp;");
         }

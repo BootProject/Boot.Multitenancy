@@ -23,12 +23,19 @@ namespace Boot.Multitenancy
         /// </summary>
         public static SessionFactoryHostContainer Current { get; private set; }
 
-
+        public static string Theme { get; private set; }
 
         private static readonly object Lock = new object();
         internal Dictionary<string, SessionFactoryData> SessionFactories { get; set; }
 
+        public static List<SessionFactoryData> GetAll()
+        {
+            List<SessionFactoryData> list = new List<SessionFactoryData>();
+            foreach (var item in Current.SessionFactories.ToList())
+                list.Add(item.Value);
 
+            return list;
+        }
 
 
         //Static Ctor
@@ -53,6 +60,7 @@ namespace Boot.Multitenancy
                 foreach (var item in Current.SessionFactories.ToList()) {
                     foreach(var domain in item.Value.DnsRecords) {
                         if (domain.Equals(string.Empty.GetDomain())) {
+                            Theme = item.Value.Theme;
                             sessionFactory = item.Value.SessionFactory;
                             break;
                         }
@@ -72,7 +80,7 @@ namespace Boot.Multitenancy
         /// <param name="sessionFactory">ISessionFactory to add</param>
         /// <param name="records">A list of dnsrecords(Host header values)</param>
         /// <returns>Current SessionFactoryContainer</returns>
-        public SessionFactoryHostContainer Add(string key, ISessionFactory sessionFactory, List<string> records)
+        public SessionFactoryHostContainer Add(string key, ISessionFactory sessionFactory, List<string> records, string theme)
         {
             lock (Lock)
             {
@@ -81,12 +89,12 @@ namespace Boot.Multitenancy
                         new SessionFactoryData{ 
                             Key = key, 
                             SessionFactory = sessionFactory, 
-                            DnsRecords = records});
+                            DnsRecords = records,
+                            Theme = theme});
                 }
                 return Current;
             }
         }
-
 
 
 

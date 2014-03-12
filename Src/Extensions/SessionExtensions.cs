@@ -233,10 +233,13 @@ namespace Boot.Multitenancy.Extensions
         /// <returns></returns>
         public static List<T> All<T>(this ISession session) where T : class
         {
-            if(!session.Query<T>().Any())
-                return new List<T>();
+            var list = new List<T>();
+            try {
+                return session.Query<T>().ToList();
+            }
+            catch { return list; }
 
-            return session.Query<T>().ToList();
+            
         }
 
 

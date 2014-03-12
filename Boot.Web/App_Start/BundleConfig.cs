@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using Boot.Multitenancy;
+using System.Web;
 using System.Web.Optimization;
 
 namespace Boot
@@ -21,7 +22,8 @@ namespace Boot
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js", 
+                      "~/Themes/Boot/config.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

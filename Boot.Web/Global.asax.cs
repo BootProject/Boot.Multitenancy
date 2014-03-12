@@ -36,7 +36,7 @@ namespace Boot
         public void Application_Error(object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError();
-            log.Debug(ex);
+            log.Debug(ex.InnerException);
         }
 
         public void Application_BeginRequest(object sender, EventArgs e)

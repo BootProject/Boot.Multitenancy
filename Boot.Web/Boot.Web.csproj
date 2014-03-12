@@ -216,6 +216,8 @@
     <Content Include="bin\x86\SQLite.Interop.dll" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Themes\Net\bg.jpg" />
+    <Content Include="Themes\Boot\logo.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -239,6 +241,12 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Themes\Boot\config.js" />
+    <Content Include="Themes\Boot\theme.css" />
+    <Content Include="Themes\Dev\config.js" />
+    <Content Include="Themes\Dev\theme.css" />
+    <Content Include="Themes\Net\config.js" />
+    <Content Include="Themes\Net\theme.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

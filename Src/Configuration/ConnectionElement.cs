@@ -22,5 +22,6 @@ namespace Boot.Multitenancy.Configuration
         public string Password { get; set; }
         public string Connectionstring { get; set; }
         public DbType DbType { get; set; }
+        public string Theme { get; set; }
     }
 }

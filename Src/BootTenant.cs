@@ -23,6 +23,8 @@ namespace Boot.Multitenancy
         private static string Connectionstring { get; set; }
         private static DbType DbType { get; set; }
 
+        public ISessionFactoryCreator Tenant { get { return this; } }
+
 
 
         /// <summary>
@@ -34,8 +36,6 @@ namespace Boot.Multitenancy
             Connectionstring = connectionstring;
             DbType = dbtype;
         }
-
-
 
 
         /// <summary>
@@ -73,6 +73,7 @@ namespace Boot.Multitenancy
 
 
 
+
         /// <summary>
         ///     Maps all Entities in bin folder.
         /// </summary>
@@ -89,8 +90,9 @@ namespace Boot.Multitenancy
                     //if (a.FullName.StartsWith("Boot"))
                     //{
                         fmc.AutoMappings.Add(AutoMap.Assembly(a)
-                        .OverrideAll(p => p.SkipProperty(typeof(NoProperty)))
-                        .Where(IsEntity));
+                          .Conventions.Add<StringColumnLengthConvention>()
+                            .OverrideAll(p => p.SkipProperty(typeof(NoProperty)))
+                                .Where(IsEntity));
                     //}
                 });
         }
@@ -126,6 +128,11 @@ namespace Boot.Multitenancy
                             .ShowSql();
                 case DbType.SqlCe:
                     return MsSqlCeConfiguration.MsSqlCe40
+                            .UseOuterJoin()
+                            .ConnectionString(Connectionstring)
+                            .ShowSql();
+                case DbType.SqlServer2008:
+                    return MsSqlConfiguration.MsSql2008
                             .UseOuterJoin()
                             .ConnectionString(Connectionstring)
                             .ShowSql();

@@ -7,9 +7,10 @@
     <title>@title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="/Themes/@Model.Theme/theme.css" type="text/css" />
 
 </head>
-<body>
+<body class="pull_top">
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -18,7 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink(title, "Index", "Home", null, new { @class = "navbar-brand" })
+                <img src="/themes/Boot/logo.png" alt="" class="logo pull-left" /> @Html.ActionLink(title, "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -26,27 +27,93 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">View our sites <b class="caret"></b></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="http://www.boot.se">Boot Project main site</a></li>
+                            <li><a href="http://www.boot.net">Business website</a></li>
+                            <li><a href="http://dev.boot.com">Development website</a></li>
+                            <li><a href="http://www.boot.com">Custom modules</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-
-    <div class="container">
-        <br/>
+    <div class="clearfix"></div>
+    <div class="container def">
         @RenderBody()
     </div>
+
+
+    <!---->
+    <footer id="footer">
         <div class="container">
-            <footer>
-                <p>
-                    &copy; @DateTime.Now.Year -<em style="color:green"> @Model.Settings.FooterText </em>
-                <p>
-                    <strong>Visit other sites: </strong>
-                    <a href="http://www.boot.com">www.boot.com</a> | <a href="http://www.boot.se">www.boot.se</a> | <a href="http://www.boot.net">www.boot.net</a> | <a href="http://dev.boot.com">dev.boot.net</a> | <a href="http://tech.boot.com">tech.boot.com</a>
-                </p>
-            </footer>
+            <div class="row sections">
+                <div class="col-sm-4 recent_posts">
+                    <h3 class="footer_header">
+                        Our sites
+                    </h3>
+                    <div class="post">
+                        <ul>
+                           <li><a href="http://www.boot.se">Boot Project main site</a></li>
+                           <li><a href="http://www.boot.net">Business website</a></li>
+                           <li><a href="http://dev.boot.com">Development website</a></li>
+                           <li><a href="http://www.boot.com">Custom modules</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4 testimonials">
+                    <h3 class="footer_header">
+                        Testimonials
+                    </h3>
+                    <div class="wrapper">
+                        <div class="quote">
+                            <span>“</span>
+                            There are reasons why you should build websites for peoples not for computer, computer cannot see, peoples do.
+                            <span></span>
+                        </div>
+                        <div class="author">
+                            <span class="glyphicon glyphicon glyphicon-user user"></span>
+                            <div class="name">Rickard Magnusson</div>
+                            <div class="info">
+                                Boot Project Developer
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 contact">
+                    <h3 class="footer_header">
+                        Contact
+                    </h3>
+                    <form action="#" method="post">
+                        <input type="text" placeholder="Your name" />
+                        <input type="text" placeholder="Your email" />
+                        <textarea rows="3" placeholder="Message"></textarea>
+                        <input type="submit" value="Send" />
+                    </form>
+                </div>
+            </div>
+            <div class="row credits">
+                <div class="col-md-12">
+                    <div class="row social">
+                        <div class="col-md-12">
+                           &nbsp;
+                        </div>
+                    </div>
+                    <div class="row copyright">
+                        <div class="col-md-12">
+                            &copy; @DateTime.Now.Year - <em> @Model.Settings.FooterText</em> @Model.Settings.FooterText
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
+    </footer>
+    <!---->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
