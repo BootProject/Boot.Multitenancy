@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Boot.Multitenancy.Factory
 {
-
     /// <summary>
     /// Interface for TenantConfiguration
     /// </summary>

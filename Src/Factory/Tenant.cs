@@ -1,14 +1,14 @@
-﻿using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
-using NHibernate;
-using NHibernate.Tool.hbm2ddl;
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using NHibernate;
+using NHibernate.Tool.hbm2ddl;
+using FluentNHibernate.Automapping;
+using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using Boot.Multitenancy.Intrastructure;
 using Boot.Multitenancy.Extensions;
 using Boot.Multitenancy.Intrastructure.Domain;
-using FluentNHibernate.Automapping;
-using Boot.Multitenancy.Intrastructure;
 
 namespace Boot.Multitenancy.Factory
 {
@@ -23,14 +23,14 @@ namespace Boot.Multitenancy.Factory
         /// </summary>
         public ITenantConfiguration Configuration { get; set; }
 
-
+        //Ctor can only be created internal.
         internal Tenant() { }
 
         /// <summary>
         /// Init a new Tenant with ITenantConfiguration.
         /// </summary>
         /// <param name="configuration">ITenantConfiguration configuration</param>
-        public Tenant(TenantConfiguration configuration)
+        public Tenant(ITenantConfiguration configuration)
         {
             Configuration = configuration;
         }

@@ -19,3 +19,14 @@ E:\NH\NH\Src\bin\Debug\Iesi.Collections.xml
 E:\NH\NH\Src\bin\Debug\NHibernate.xml
 E:\NH\NH\Src\obj\Debug\Boot.Multitenancy.dll
 E:\NH\NH\Src\obj\Debug\Boot.Multitenancy.pdb
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Debug\Boot.Multitenancy.dll
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Debug\Boot.Multitenancy.pdb
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Debug\FluentNHibernate.dll
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Debug\Iesi.Collections.dll
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Debug\NHibernate.dll
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Debug\FluentNHibernate.xml
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Debug\Iesi.Collections.xml
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Debug\NHibernate.xml
+E:\Bitbucket\Boot.Multitenancy\Src\obj\Debug\Boot.Multitenancy.csprojResolveAssemblyReference.cache
+E:\Bitbucket\Boot.Multitenancy\Src\obj\Debug\Boot.Multitenancy.dll
+E:\Bitbucket\Boot.Multitenancy\Src\obj\Debug\Boot.Multitenancy.pdb

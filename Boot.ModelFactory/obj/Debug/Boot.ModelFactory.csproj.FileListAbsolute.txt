@@ -11,3 +11,16 @@ E:\NH\NH\Boot.ModelFactory\obj\Debug\Boot.ModelFactory.dll
 E:\NH\NH\Boot.ModelFactory\obj\Debug\Boot.ModelFactory.pdb
 E:\NH\NH\Boot.ModelFactory\bin\Debug\Boot.Multitenancy.dll
 E:\NH\NH\Boot.ModelFactory\bin\Debug\Boot.Multitenancy.pdb
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Debug\Boot.ModelFactory.dll
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Debug\Boot.ModelFactory.pdb
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Debug\Boot.Multitenancy.dll
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Debug\FluentNHibernate.dll
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Debug\Iesi.Collections.dll
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Debug\NHibernate.dll
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Debug\Boot.Multitenancy.pdb
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Debug\FluentNHibernate.xml
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Debug\Iesi.Collections.xml
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Debug\NHibernate.xml
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\obj\Debug\Boot.ModelFactory.csprojResolveAssemblyReference.cache
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\obj\Debug\Boot.ModelFactory.dll
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\obj\Debug\Boot.ModelFactory.pdb

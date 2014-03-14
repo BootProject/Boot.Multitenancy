@@ -42,6 +42,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "res", "res", "{8E429ECA-236
 		Documentation\rec\website.png = Documentation\rec\website.png
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Lib", "_Lib", "{2A8DF5D2-06CB-4D7D-A458-AAEC2FEBB9A7}"
+	ProjectSection(SolutionItems) = preProject
+		Src\bin\Release\Boot.Multitenancy.v1.5.rar = Src\bin\Release\Boot.Multitenancy.v1.5.rar
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

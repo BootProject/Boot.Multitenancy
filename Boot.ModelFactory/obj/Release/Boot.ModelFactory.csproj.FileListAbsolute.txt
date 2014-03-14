@@ -1,0 +1,13 @@
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Release\Boot.ModelFactory.dll
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Release\Boot.ModelFactory.pdb
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Release\Boot.Multitenancy.dll
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Release\FluentNHibernate.dll
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Release\Iesi.Collections.dll
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Release\NHibernate.dll
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Release\Boot.Multitenancy.pdb
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Release\FluentNHibernate.xml
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Release\Iesi.Collections.xml
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\bin\Release\NHibernate.xml
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\obj\Release\Boot.ModelFactory.csprojResolveAssemblyReference.cache
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\obj\Release\Boot.ModelFactory.dll
+E:\Bitbucket\Boot.Multitenancy\Boot.ModelFactory\obj\Release\Boot.ModelFactory.pdb

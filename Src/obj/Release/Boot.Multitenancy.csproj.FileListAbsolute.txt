@@ -1,0 +1,10 @@
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Release\Boot.Multitenancy.dll
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Release\Boot.Multitenancy.pdb
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Release\FluentNHibernate.dll
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Release\Iesi.Collections.dll
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Release\NHibernate.dll
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Release\FluentNHibernate.xml
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Release\Iesi.Collections.xml
+E:\Bitbucket\Boot.Multitenancy\Src\bin\Release\NHibernate.xml
+E:\Bitbucket\Boot.Multitenancy\Src\obj\Release\Boot.Multitenancy.dll
+E:\Bitbucket\Boot.Multitenancy\Src\obj\Release\Boot.Multitenancy.pdb
