@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Boot.Models
+namespace Boot.Web.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

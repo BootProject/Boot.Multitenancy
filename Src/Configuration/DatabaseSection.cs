@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Boot.Multitenancy.Extensions;
 
 namespace Boot.Multitenancy.Configuration
 {
-
     /// <summary>
     /// DatabaseSection
     /// Configuration of a DatabaseElement
@@ -17,9 +19,8 @@ namespace Boot.Multitenancy.Configuration
         public DatabaseSection() { }
 
 
-
         /// <summary>
-        /// Creates a new DatabaseSection
+        /// Creates a new DatabaseSection.
         /// </summary>
         /// <param name="name">Name, Key</param>
         /// <param name="autoPersist">If to create this object</param>
@@ -30,11 +31,10 @@ namespace Boot.Multitenancy.Configuration
             this.AutoPersist = autoPersist;
             this.DbType = dbtype;
         }
-        
 
 
         /// <summary>
-        /// Name of key
+        /// Name of key(Database).
         /// </summary>
         [ConfigurationProperty("name", IsRequired = true)]
         public String Name
@@ -43,10 +43,9 @@ namespace Boot.Multitenancy.Configuration
             set { this["name"] = value; }
         }
 
-        
-        
+
         /// <summary>
-        /// If to create this database
+        /// If to create a database.
         /// </summary>
         [ConfigurationProperty("autoPersist", DefaultValue = false, IsRequired = true)]
         public Boolean AutoPersist
@@ -56,9 +55,8 @@ namespace Boot.Multitenancy.Configuration
         }
 
 
-
         /// <summary>
-        /// DbType
+        /// DbType, the type of database.
         /// </summary>
         [ConfigurationProperty("dbType", DefaultValue = DbType.SqlCe, IsRequired = true)]
         public DbType DbType
@@ -68,17 +66,15 @@ namespace Boot.Multitenancy.Configuration
         }
 
 
-
-
         /// <summary>
         /// Custom connectionstring.
         /// Use this to init your own connectionstring
         /// </summary>
-        [ConfigurationProperty("connectionString", IsRequired = false)]
+        [ConfigurationProperty("connectionstring", IsRequired = false)]
         public String Connectionstring
         {
-            get { return (string)this["connectionString"]; }
-            set { this["connectionString"] = value; }
+            get { return (string)this["connectionstring"]; }
+            set { this["connectionstring"] = value; }
         }
 
 
@@ -94,8 +90,6 @@ namespace Boot.Multitenancy.Configuration
             get { return (string)this["theme"]; }
             set { this["theme"] = value; }
         }
-
-
 
 
         /// <summary>
@@ -118,6 +112,49 @@ namespace Boot.Multitenancy.Configuration
         public List<string> DomainList
         {
             get { return Domains.CreateList(); }
+        }
+
+
+        //Dictionary<string, object>
+        [ConfigurationProperty("properties", IsRequired = false)]
+        public String Properties
+        {
+            get { return (string)this["properties"]; }
+            set { this["properties"] = value; }
+        }
+
+
+        /// <summary>
+        /// Extension, a dictionary with properties.
+        /// </summary>
+        /// <returns>A dictionary with properties</returns>
+        public Dictionary<string, object> PropertyList
+        {
+            get { return ParseProperties(); }
+        }
+
+
+        /// <summary>
+        /// Extension, creates a dictionary from a string.
+        /// </summary>
+        /// <returns>A dictionary of properties</returns>
+        private Dictionary<string, object> ParseProperties()
+        {
+            var delimiter = new char[] { '|' };
+            var comma = new char[] { ',' };
+            string[] props = Properties.Split(delimiter);
+
+            var pair = new Dictionary<string, object>();
+
+            foreach (var prop in props)
+            {
+                if (!string.IsNullOrEmpty(prop)) { 
+                    var keyvaluePair = prop.Split(comma);
+                    pair.Add(keyvaluePair[0], keyvaluePair[1]);
+                }
+            }
+
+            return pair;
         }
     }
 }

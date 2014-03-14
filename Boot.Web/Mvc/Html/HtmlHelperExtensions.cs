@@ -1,21 +1,16 @@
 ﻿using Boot.ModelFactory;
-using log4net;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Boot.Mvc.Html
+namespace Boot.Web.Mvc.Html
 {
     public static class HtmlHelperExtensions
     {
-
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
 
         /// <summary>
         ///  Create a Zone element.
@@ -27,16 +22,17 @@ namespace Boot.Mvc.Html
         /// <returns>A rendered Mvc object</returns>
         public static IHtmlString Zone(this HtmlHelper html, dynamic model, Region zone)
         {
-            try { 
-
+            try
+            {
                 var sb = new StringBuilder();
                 var viewmodel = (Models.PageViewModel)model;
                 var current = Current(model);
-                var contents = viewmodel.Contents.FindAll(d => d.PageId==current.Id);
+                var contents = viewmodel.Contents.FindAll(d => d.PageId == current.Id);
 
                 foreach (var item in contents) //MySql saves enum as string... strange!!
-                { 
-                    if (item.Zone.ToString() == zone.ToString()) {
+                {
+                    if (item.Zone.ToString() == zone.ToString())
+                    {
                         sb.Append(RenderWidget(html, "~/Views/Widgets/Content.cshtml", item));
                     }
                 }
@@ -44,9 +40,11 @@ namespace Boot.Mvc.Html
                 if (sb.ToString().Length > 0)
                     return new HtmlString(sb.ToString());
 
-                
-            }catch(Exception ex){
-                log.Debug(ex.Message);
+
+            }
+            catch (Exception ex)
+            {
+               
             }
 
             return new HtmlString("&nbsp;");

@@ -1,0 +1,13 @@
+E:\NH\NH\Boot.ModelFactory\bin\Debug\Boot.ModelFactory.dll
+E:\NH\NH\Boot.ModelFactory\bin\Debug\Boot.ModelFactory.pdb
+E:\NH\NH\Boot.ModelFactory\bin\Debug\FluentNHibernate.dll
+E:\NH\NH\Boot.ModelFactory\bin\Debug\Iesi.Collections.dll
+E:\NH\NH\Boot.ModelFactory\bin\Debug\NHibernate.dll
+E:\NH\NH\Boot.ModelFactory\bin\Debug\FluentNHibernate.xml
+E:\NH\NH\Boot.ModelFactory\bin\Debug\Iesi.Collections.xml
+E:\NH\NH\Boot.ModelFactory\bin\Debug\NHibernate.xml
+E:\NH\NH\Boot.ModelFactory\obj\Debug\Boot.ModelFactory.csprojResolveAssemblyReference.cache
+E:\NH\NH\Boot.ModelFactory\obj\Debug\Boot.ModelFactory.dll
+E:\NH\NH\Boot.ModelFactory\obj\Debug\Boot.ModelFactory.pdb
+E:\NH\NH\Boot.ModelFactory\bin\Debug\Boot.Multitenancy.dll
+E:\NH\NH\Boot.ModelFactory\bin\Debug\Boot.Multitenancy.pdb

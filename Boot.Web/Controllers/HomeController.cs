@@ -1,20 +1,23 @@
-﻿using System;
+﻿using Boot.ModelFactory;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Boot.ModelFactory;
-using Boot.Models;
+using Host = Boot.Multitenancy.SessionManager.SessionFactoryHostContainer;
+using Boot.Multitenancy.Extensions;
+using Boot.Multitenancy.SessionManager;
+using Boot.Web.Models;
 
-namespace Boot.Controllers
+namespace Boot.Web.Controllers
 {
     public class HomeController : Controller
     {
-        //TestModel
-        PageViewModel Model;
+        public PageViewModel Model { get; set; }
 
         public HomeController()
         {
+            new SetupModel().CreateIfNotExist();
             Model = new PageViewModel();
         }
 
@@ -25,15 +28,11 @@ namespace Boot.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View(Model);
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View(Model);
         }
     }

@@ -1,5 +1,5 @@
 ﻿body {
-    background: rgb(76,76,76);
+    background: rgba(19,19,19,1);
     color: #fff;
 }
 body.pull_top {
@@ -16,18 +16,18 @@ blockquote p{
 }
 
 .nav-pills li a{
-    background: #f2f2f2;
-    color: #b5b5b6;
-}
-
-.nav-pills li a:hover{
     background: #59bfef;
     color: #fff;
 }
 
+.nav-pills li a:hover{
+    background: #f2f2f2;
+    color: #b5b5b6;
+}
+
 .nav-pills li a:hover .badge{
-    background: #fff;
-    color: #59bfef;
+    background: #59bfef;
+    color: #fff;
 }
 
 

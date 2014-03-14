@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 
-
 namespace Boot.Multitenancy.Configuration
 {
 
@@ -11,7 +10,6 @@ namespace Boot.Multitenancy.Configuration
     /// </summary>
     public class SessionFactoryConfiguration : ConfigurationSection
     {
-
 
         /// <summary>
         /// A list of databases, configurered in web.config.
@@ -22,7 +20,6 @@ namespace Boot.Multitenancy.Configuration
         {
             get { return (DatabaseCollection)base["databases"]; }
         }
-
 
 
         /// <summary>
@@ -36,16 +33,15 @@ namespace Boot.Multitenancy.Configuration
         }
 
 
-
         /// <summary>
-        /// The namespace of yours, to look for IEntity's in.
+        /// The namespace of yours, to look after IEntity's.
+        /// Note! use IEntity and Entity class to avoid reference problem.
         /// </summary>
-        [ConfigurationProperty("namespace", IsRequired=true)]
+        [ConfigurationProperty("namespace", IsRequired = true)]
         public string Namespace
         {
             get { return (string)this["namespace"]; }
             set { this["namespace"] = value; }
         }
-
     }
 }

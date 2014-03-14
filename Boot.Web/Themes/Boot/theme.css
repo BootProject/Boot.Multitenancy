@@ -289,7 +289,6 @@ blockquote p {
             padding: 8px 20px;
             border-radius: 3px;
             font-size: 14px;
-            font-family: Lato !important;
             width: 95%;
             -webkit-transition: background-color .2s linear;
             -moz-transition: background-color .2s linear;

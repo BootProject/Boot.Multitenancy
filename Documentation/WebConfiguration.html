@@ -1,0 +1,44 @@
+<p><img src="rec/multitenancy.png" alt="Logo" /></p>
+
+<h1>Web.config configuration</h1>
+
+<p>This is the most trivial way of getting starting is to use the built in configuration.</p>
+
+<h3>Init host</h3>
+
+<p>In Startup.cs or Applicatio_Start in Global application, add:</p>
+
+<pre><code>//startup.cs
+  Host.Init();
+</code></pre>
+
+<p>This will trigger Boot.Multitenancy to look for the configuration in web.config.</p>
+
+<h3>Web.config.</h3>
+
+<p>Add these lines in web.config (root document). </p>
+
+<pre><code>&lt;configSections&gt;
+  &lt;section name="sessionFactoryConfiguration" type="Boot.Multitenancy.Configuration.SessionFactoryConfiguration, Boot.Multitenancy" /&gt;  
+&lt;/configSections&gt;
+
+&lt;sessionFactoryConfiguration configSource="Boot.SessionConfiguration.MySql.config" /&gt;
+</code></pre>
+
+<h3>External config file.</h3>
+
+<p>Create a file with a name that suit your database. For eg. Databases.MySql.config, in the root of application(web project) and add the following content.</p>
+
+<pre><code>&lt;sessionFactoryConfiguration persist="true" namespace="Boot"&gt;
+  &lt;databases&gt;
+    &lt;clear/&gt;
+      &lt;add name="devdata"
+        theme = "Dev"
+        autoPersist="true"
+        dbType="MySql5"
+        connectionstring = "Server=127.0.0.1;Port=3306;Database=devdata;Uid=boots;Pwd=boots;"
+        domains="www.boot.com|boot.com"
+        properties = "Theme,Dev" /&gt;
+        &lt;!--Add more databases here if needed.--&gt;
+&lt;/sessionFactoryConfiguration&gt;
+</code></pre>

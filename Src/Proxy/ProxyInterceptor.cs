@@ -1,17 +1,9 @@
-﻿using NHibernate;
+﻿using System;
+using NHibernate;
 using NHibernate.Proxy.DynamicProxy;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Boot.Multitenancy.Proxy
 {
-
-
     public class NotifyPropertyChangedInterceptor : EmptyInterceptor
     {
         private ISession session = null;
@@ -36,9 +28,6 @@ namespace Boot.Multitenancy.Proxy
 
             return (proxy);
         }
-
-
-
 
         class _NotifyPropertyChangedInterceptor : NHibernate.Proxy.DynamicProxy.IInterceptor
         {
@@ -79,10 +68,6 @@ namespace Boot.Multitenancy.Proxy
 
                 return (result);
             }
-
-
         }
-
     }
-
 }

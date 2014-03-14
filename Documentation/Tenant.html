@@ -1,0 +1,35 @@
+<p><img src="rec/boot-multitenancy-init.png" alt="Website" /></p>
+
+<h1>Tenant</h1>
+
+<blockquote>
+  <p>The Tenant is the holder of connectionstring and a unique key for the Tenant.</p>
+  
+  <p>To create a Tenant there's a few things to know.</p>
+  
+  <ol>
+  <li>The unique name for this Tenant</li>
+  <li>Your connetionstring, a full connectionstring</li>
+  <li>A list of HostHeader values</li>
+  </ol>
+</blockquote>
+
+<pre><code>//The Tenant contructor takes a ITenantConfiguration configuration s argument.
+public Tenant(ITenantConfiguration configuration){}
+
+//Create config
+var conf = new TenantConfiguration(){}
+//Create a Tenant
+var Tenant= new Tenant(conf);
+</code></pre>
+
+<h3>ITenantConfiguration</h3>
+
+<p>TenantConfiguration is a holder of a unique key, a collection of domains and also a custom Properties, where you can add custom properties, like for eg. a Theme.</p>
+
+<pre><code>    public string Key { get; set; } //Unique key
+    public DbType DbType { get; set; } //DbType.MySql
+    public string Connectionstring { get; set; } //..
+    public List&lt;string&gt; HostValues { get; set; } // "localhost|www.boot.com" ...
+    public Dictionary&lt;string, object&gt; Properties { get; set; } //Custom properties
+</code></pre>

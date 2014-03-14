@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
 namespace Boot.Multitenancy.Configuration
 {
     /// <summary>
-    /// 
+    /// Configuration element
     /// </summary>
+    [Obsolete("Not implemented, and probably will not be. Leave out for now.")]
     public class ConnectionElement
     {
+
         /// <summary>
         /// The name or key to send to Boot.Multitenancy
         /// </summary>

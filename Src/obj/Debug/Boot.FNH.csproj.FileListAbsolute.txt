@@ -1,0 +1,4 @@
+E:\NH\NH\Boot.FNH\bin\Debug\Boot.FNH.dll
+E:\NH\NH\Boot.FNH\bin\Debug\Boot.FNH.pdb
+E:\NH\NH\Boot.FNH\obj\Debug\Boot.FNH.dll
+E:\NH\NH\Boot.FNH\obj\Debug\Boot.FNH.pdb

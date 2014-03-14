@@ -1,5 +1,4 @@
-
-
+<!--Todo: create this schema for web.config-->
 <xs:schema id="bootSectionSchema"
            targetNamespace="http://tempuri.org/Boot.Multitenancy.xsd"
            elementFormDefault="qualified"

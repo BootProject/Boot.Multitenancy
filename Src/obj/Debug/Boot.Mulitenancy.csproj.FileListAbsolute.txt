@@ -1,0 +1,10 @@
+E:\NH\NH\Boot.FNH\bin\Debug\FluentNHibernate.dll
+E:\NH\NH\Boot.FNH\bin\Debug\Iesi.Collections.dll
+E:\NH\NH\Boot.FNH\bin\Debug\NHibernate.dll
+E:\NH\NH\Boot.FNH\bin\Debug\FluentNHibernate.xml
+E:\NH\NH\Boot.FNH\bin\Debug\Iesi.Collections.xml
+E:\NH\NH\Boot.FNH\bin\Debug\NHibernate.xml
+E:\NH\NH\Boot.FNH\bin\Debug\Boot.Multitenancy.dll
+E:\NH\NH\Boot.FNH\bin\Debug\Boot.Multitenancy.pdb
+E:\NH\NH\Boot.FNH\obj\Debug\Boot.Multitenancy.dll
+E:\NH\NH\Boot.FNH\obj\Debug\Boot.Multitenancy.pdb

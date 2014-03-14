@@ -1,0 +1,27 @@
+<p><img src="rec/multitenancy.png" alt="Logo" /></p>
+
+<h1>Host</h1>
+
+<p>The Host is responsible for creating Tenants. Host is implemented as a Singleton, because there can be only one Host that contain Tenants.</p>
+
+<h2>There are several ways to create a Tenant.</h2>
+
+<h3>Web.config</h3>
+
+<blockquote>
+  <p>The regular way is to use Host.Init(). This require a minimum effort in web.config. <a href="webconfiguration">Read more</a></p>
+</blockquote>
+
+<h3>Built in Tenant</h3>
+
+<blockquote>
+  <p>The second way is to create a dictionary of Tenants and persist these to Init(Dictionay<Key, ITenant>).</p>
+</blockquote>
+
+<h3>Create your own Tenant</h3>
+
+<blockquote>
+  <p>The third way is to write your own Tenant and provide them as a Dictionay<Key, YourClassNameOfYourTenant>.</p>
+</blockquote>
+
+<p>web.config setup.</p>

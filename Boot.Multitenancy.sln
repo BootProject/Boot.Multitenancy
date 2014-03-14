@@ -3,30 +3,44 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boot.Multitenancy", "Src\Boot.Multitenancy.csproj", "{204DD028-0830-4916-9C8F-01CA9337A378}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boot.Multitenancy", "Src\Boot.Multitenancy.csproj", "{D98C9BBC-E3F9-46B0-9A0C-4ED87A38A37C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1F43254A-8F44-4BE8-B196-E34A8DB838FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boot.ModelFactory", "Boot.ModelFactory\Boot.ModelFactory.csproj", "{6956BC78-3208-4F77-A87E-FC95D0BBD4E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boot.Web", "Boot.Web\Boot.Web.csproj", "{E268153E-2C2B-45F0-975B-C33BFC451824}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{772A9730-DC56-4FE2-AF3E-16908E22BFBE}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{C4A0E174-F09C-4B80-8E63-4F340CA5E9A4}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution Items", "_Solution Items", "{9CCDD7C5-6880-442A-B30E-83FB40E0014C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_SolutionItems", "{30CE6505-CC51-4B99-B855-6079483B802D}"
 	ProjectSection(SolutionItems) = preProject
 		Notes.txt = Notes.txt
-		Readme.md = Readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boot.Web", "Boot.Web\Boot.Web.csproj", "{16EF3C4F-16C0-429F-A436-338D03C4FB7F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Documentation", "_Documentation", "{0F0F1BC2-7545-4B1B-8E73-9DA6DB261CAD}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\boot.web.md = Documentation\boot.web.md
+		Documentation\Host.md = Documentation\Host.md
+		Documentation\Readme.md = Documentation\Readme.md
+		Documentation\SessionFactoryHostContainer.md = Documentation\SessionFactoryHostContainer.md
+		Documentation\TableOfContents.md = Documentation\TableOfContents.md
+		Documentation\Tenant.md = Documentation\Tenant.md
+		Documentation\WebConfiguration.md = Documentation\WebConfiguration.md
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boot.ModelFactory", "Boot.ModelFactory\Boot.ModelFactory.csproj", "{56FBAC30-8D77-4D23-884F-06EC65CEA6EA}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{9F6A0043-8D8A-4081-AA2D-3538D51B8D2B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boot.Test", "Boot.Test\Boot.Test.csproj", "{5A0F39FC-1F71-4044-9806-EB21EFB9EE9F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "res", "res", "{8E429ECA-236C-4790-9241-21AEF6CD50F5}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\rec\boot-multitenancy-init.png = Documentation\rec\boot-multitenancy-init.png
+		Documentation\rec\init.png = Documentation\rec\init.png
+		Documentation\rec\multitenancy.png = Documentation\rec\multitenancy.png
+		Documentation\rec\sessionfactoryhostcontainer.png = Documentation\rec\sessionfactoryhostcontainer.png
+		Documentation\rec\transactions.png = Documentation\rec\transactions.png
+		Documentation\rec\website.png = Documentation\rec\website.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,28 +48,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{204DD028-0830-4916-9C8F-01CA9337A378}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{204DD028-0830-4916-9C8F-01CA9337A378}.Debug|Any CPU.Build.0 = Release|Any CPU
-		{204DD028-0830-4916-9C8F-01CA9337A378}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{204DD028-0830-4916-9C8F-01CA9337A378}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16EF3C4F-16C0-429F-A436-338D03C4FB7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16EF3C4F-16C0-429F-A436-338D03C4FB7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16EF3C4F-16C0-429F-A436-338D03C4FB7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16EF3C4F-16C0-429F-A436-338D03C4FB7F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56FBAC30-8D77-4D23-884F-06EC65CEA6EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56FBAC30-8D77-4D23-884F-06EC65CEA6EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56FBAC30-8D77-4D23-884F-06EC65CEA6EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56FBAC30-8D77-4D23-884F-06EC65CEA6EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A0F39FC-1F71-4044-9806-EB21EFB9EE9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A0F39FC-1F71-4044-9806-EB21EFB9EE9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A0F39FC-1F71-4044-9806-EB21EFB9EE9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A0F39FC-1F71-4044-9806-EB21EFB9EE9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D98C9BBC-E3F9-46B0-9A0C-4ED87A38A37C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D98C9BBC-E3F9-46B0-9A0C-4ED87A38A37C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D98C9BBC-E3F9-46B0-9A0C-4ED87A38A37C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D98C9BBC-E3F9-46B0-9A0C-4ED87A38A37C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6956BC78-3208-4F77-A87E-FC95D0BBD4E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6956BC78-3208-4F77-A87E-FC95D0BBD4E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6956BC78-3208-4F77-A87E-FC95D0BBD4E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6956BC78-3208-4F77-A87E-FC95D0BBD4E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E268153E-2C2B-45F0-975B-C33BFC451824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E268153E-2C2B-45F0-975B-C33BFC451824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E268153E-2C2B-45F0-975B-C33BFC451824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E268153E-2C2B-45F0-975B-C33BFC451824}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{16EF3C4F-16C0-429F-A436-338D03C4FB7F} = {C4A0E174-F09C-4B80-8E63-4F340CA5E9A4}
-		{5A0F39FC-1F71-4044-9806-EB21EFB9EE9F} = {9F6A0043-8D8A-4081-AA2D-3538D51B8D2B}
+		{8E429ECA-236C-4790-9241-21AEF6CD50F5} = {0F0F1BC2-7545-4B1B-8E73-9DA6DB261CAD}
 	EndGlobalSection
 EndGlobal

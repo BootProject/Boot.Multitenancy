@@ -1,16 +1,13 @@
-﻿using Boot.Mvc.Html;
-using Boot.Web.Mvc.Html;
+﻿using Boot.Web.Mvc.Html;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Boot.Models
+namespace Boot.Web.Models
 {
     /// <summary>
     /// Base class for all pages. Contain a lot of HtmlExtension helpers.
@@ -53,8 +50,7 @@ namespace Boot.Models
             return HtmlHelperExtensions.Zone(Html, model, zone);
         }
 
-       
+
         #endregion
     }
-
 }

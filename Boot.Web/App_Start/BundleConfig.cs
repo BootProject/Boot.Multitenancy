@@ -1,8 +1,9 @@
-﻿using Boot.Multitenancy;
+﻿using Boot.Multitenancy.SessionManager;
+using Boot.Multitenancy.Extensions;
 using System.Web;
 using System.Web.Optimization;
 
-namespace Boot
+namespace Boot.Web
 {
     public class BundleConfig
     {
@@ -22,12 +23,14 @@ namespace Boot
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js", 
+                      "~/Scripts/respond.js",
                       "~/Themes/Boot/config.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            //bundles.Add(new StyleBundle("~/themes").Include(string.Format("~/Themes/{0}/theme.css", SessionFactoryHostContainer.Current.Theme())));
         }
     }
 }

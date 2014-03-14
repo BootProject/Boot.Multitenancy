@@ -1,36 +1,16 @@
-﻿using log4net;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
-using System;
-using System.IO;
-using System.Reflection;
 
-[assembly: OwinStartupAttribute(typeof(Boot.Startup))]
-namespace Boot
+[assembly: OwinStartupAttribute(typeof(Boot.Web.Startup))]
+namespace Boot.Web
 {
     public partial class Startup
     {
-        private readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
         public void Configuration(IAppBuilder app)
         {
-            log.Clear();
-            log4net.Config.XmlConfigurator.Configure();
-            ConfigureAuth(app);
-        }
-    }
+            BootConfig.Init();
 
-    public static class LoggExtension
-    {
-        public static void Clear(this ILog log) 
-        {
-            try { 
-                var f = new FileInfo(AppDomain.CurrentDomain.GetData("DataDirectory") + "\\BootLogger.log");
-                var fileStream = f.OpenWrite();
-                fileStream.SetLength(0); //Delete content on each startup.
-                fileStream.Close();
-            }
-            catch { }
+            ConfigureAuth(app);
         }
     }
 }

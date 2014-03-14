@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace Boot.Multitenancy.Filters
 {
+    /// <summary>
+    /// Adds length value to string fields in database(TEXT)
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class StringLength : System.Attribute
     {
         public int Length = 0;
-        public StringLength(int taggedStrLength)
+        public StringLength(int len)
         {
-            Length = taggedStrLength;
+            Length = len;
         }
     }
 }

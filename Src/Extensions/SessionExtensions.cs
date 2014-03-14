@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
 using NHibernate;
 using NHibernate.Linq;
-using System.ComponentModel;
 
 namespace Boot.Multitenancy.Extensions
 {
     /// <summary>
     /// Contains helper for nHibernate ISessions
     /// </summary>
-    public static class SessionExtensions
+    public static partial class SessionExtensions
     {
 
         /// <summary>
@@ -29,20 +29,22 @@ namespace Boot.Multitenancy.Extensions
             else
                 inLocalTransaction = false;
 
-            try{
+            try
+            {
                 Work(session);
 
                 if (inLocalTransaction)
                     session.Transaction.Commit();
 
-            }catch{
+            }
+            catch
+            {
                 if (inLocalTransaction)
                     session.Transaction.Rollback();
             }
 
             return session;
         }
-
 
 
         /// <summary>
@@ -56,7 +58,6 @@ namespace Boot.Multitenancy.Extensions
         {
             return session.Save<T>(target, null);
         }
-
 
 
         /// <summary>
@@ -73,11 +74,10 @@ namespace Boot.Multitenancy.Extensions
             {
                 s.Save(target);
 
-                if (saveCallback != null) 
+                if (saveCallback != null)
                     saveCallback(target);
             });
         }
-
 
 
         /// <summary>
@@ -91,7 +91,6 @@ namespace Boot.Multitenancy.Extensions
         {
             return session.Update<T>(target, null);
         }
-
 
 
         /// <summary>
@@ -108,11 +107,10 @@ namespace Boot.Multitenancy.Extensions
             {
                 s.Update(target);
 
-                if (updateCallback != null) 
+                if (updateCallback != null)
                     updateCallback(target);
             });
         }
-
 
 
         /// <summary>
@@ -122,11 +120,10 @@ namespace Boot.Multitenancy.Extensions
         /// <param name="session"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static ISession Delete<T>(this ISession session,T target) where T : class
+        public static ISession Delete<T>(this ISession session, T target) where T : class
         {
             return session.Delete<T>(target, null);
         }
-
 
 
         /// <summary>
@@ -151,7 +148,6 @@ namespace Boot.Multitenancy.Extensions
         }
 
 
-
         /// <summary>
         /// Delete T with expression
         /// </summary>
@@ -163,7 +159,6 @@ namespace Boot.Multitenancy.Extensions
         {
             return session.Delete<T>(expression, null);
         }
-
 
 
         /// <summary>
@@ -180,17 +175,16 @@ namespace Boot.Multitenancy.Extensions
             {
                 var toDelete = session.Find<T>(expression);
                 toDelete.ForEach(d =>
-                    {
-                        x.Delete(d);
+                {
+                    x.Delete(d);
 
-                        if (deleteCallback != null)
-                            deleteCallback(d);
-                    });
+                    if (deleteCallback != null)
+                        deleteCallback(d);
+                });
             });
 
             return session;
         }
-
 
 
         /// <summary>
@@ -200,7 +194,7 @@ namespace Boot.Multitenancy.Extensions
         /// <param name="session"></param>
         /// <param name="expression"></param>
         /// <returns></returns>
-        public static List<T> Find<T>(this ISession session, Expression<Func<T, bool>> expression)  where T : class
+        public static List<T> Find<T>(this ISession session, Expression<Func<T, bool>> expression) where T : class
         {
             var ret = new List<T>();
             var inLocalTransaction = true;
@@ -210,19 +204,21 @@ namespace Boot.Multitenancy.Extensions
             else
                 inLocalTransaction = false;
 
-            try{
+            try
+            {
                 ret = session.Query<T>().Where<T>(expression).ToList();
 
                 if (inLocalTransaction)
                     session.Transaction.Commit();
-            }catch{
+            }
+            catch
+            {
                 if (inLocalTransaction)
                     session.Transaction.Rollback();
             }
 
             return ret;
         }
-
 
 
         /// <summary>
@@ -234,14 +230,14 @@ namespace Boot.Multitenancy.Extensions
         public static List<T> All<T>(this ISession session) where T : class
         {
             var list = new List<T>();
-            try {
+            try
+            {
                 return session.Query<T>().ToList();
             }
             catch { return list; }
 
-            
-        }
 
+        }
 
 
         /// <summary>
@@ -259,7 +255,6 @@ namespace Boot.Multitenancy.Extensions
                 resultListCallback(ret);
             return session;
         }
-
 
 
         /// <summary>
@@ -281,7 +276,7 @@ namespace Boot.Multitenancy.Extensions
                 .List<T>();
         }
 
-
+       
         /// <summary>
         /// Perform a transaction
         /// </summary>
@@ -290,19 +285,22 @@ namespace Boot.Multitenancy.Extensions
         /// <returns></returns>
         public static ISession WithTransaction(this ISession session, Action<ISession> unitsOfWork)
         {
-            if (session.IsConnected == false) { //This should never happend. ??
-                throw new Exception("Something has happend to the session... It's currently closed.");
+            if (session.IsConnected == false)
+            { //This should never happend. ??
+               // Log.Debug("Lost session");
             }
 
             session.BeginTransaction();
 
-            try{
+            try
+            {
                 unitsOfWork(session);
                 session.Transaction.Commit();
 
-            }catch(Exception x){
+            }
+            catch (Exception ex)
+            {
                 session.Transaction.Rollback();
-                throw x;
             }
             return session;
         }
