@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Boot.Multitenancy;
-using Boot.Multitenancy.Factory;
+#Create Tenant collection from code
 
-namespace Boot.Web
-{
+> It's pretty simple to create a Tenant and adds it to Boot.Multitenancy.
+> Create the ITenantConfiguration, and add it to an ITenant.
+> Add each ITenant to the collection.
+
+
+    using Boot.Multitenancy;
+    using Boot.Multitenancy.Factory;
+
     public static class BootConfig
     {
         public static void Init()
@@ -27,13 +28,11 @@ namespace Boot.Web
                 Connectionstring = "Server=127.0.0.1;Port=3306;Database=BootTestData;Uid=boots;Pwd=boots;"
             };
 
-            var tenants = new TenantCollection { 
-                new Tenant(conf1), 
-                new Tenant(conf2)
+                var tenants = new TenantCollection { 
+                	new Tenant(conf1), 
+                	new Tenant(conf2)
             };
 
-            //Host.Init(tenants);
-            Host.Init();
+            Host.Init(tenants);
         }
     }
-}
