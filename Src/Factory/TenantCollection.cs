@@ -12,7 +12,6 @@ namespace Boot.Multitenancy.Factory
     /// </summary>
     public class TenantCollection : Dictionary<string, Tenant>, ITenantCollection
     {
-
         /// <summary>
         /// Add a Tenant to collection
         /// </summary>
@@ -20,6 +19,24 @@ namespace Boot.Multitenancy.Factory
         public void Add(Tenant tenant)
         {
             base.Add(tenant.Configuration.Key, tenant);
+        }
+
+
+        /// <summary>
+        /// Validate hostheader values.
+        /// Ensure they are unique.
+        /// </summary>
+        internal void Validate()
+        {
+            var list = new List<string>();
+            var unique = new List<string>();
+            var collection = ((TenantCollection)this).Values.ToList();
+            collection.ForEach(t => { list.AddRange(t.Configuration.HostValues); });
+            list.ForEach(t => {
+                if (unique.Contains(t))
+                    throw new TenantCollecionValidateException();
+                unique.Add(t);
+            });
         }
     }
 }

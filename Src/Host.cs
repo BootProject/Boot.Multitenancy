@@ -62,14 +62,16 @@ namespace Boot.Multitenancy
         /// <summary>
         /// Intit configuration with a List of Tenants
         /// </summary>
-        /// <param name="tenants"></param>
+        /// <param name="tenants">TenantCollection to add</param>
         public static void Init(TenantCollection tenants)
         {
+            tenants.Validate();
+
             (from tenant in tenants 
               select tenant)
                 .ToList()
-                    .ForEach(t => {
-
+                    .ForEach(t => 
+                    {
                         var tenant = (Tenant)t.Value;
                         tenant.Configuration.SessionFactory = tenant.CreateConfig();
 
@@ -80,8 +82,7 @@ namespace Boot.Multitenancy
                             tenant.Configuration.Properties = new Dictionary<string, object>();
                             
                         SessionFactoryHostContainer.Current.Add(tenant);
-
-                        });
+                     });
         }
 
 

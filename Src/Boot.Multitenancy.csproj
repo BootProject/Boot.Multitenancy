@@ -64,6 +64,7 @@
     <Compile Include="Extensions\SessionExtensions.cs" />
     <Compile Include="Factory\ITenantCollection.cs" />
     <Compile Include="Factory\TenantCollection.cs" />
+    <Compile Include="Factory\TenantCollecionValidateException.cs" />
     <Compile Include="Filters\StringLength.cs" />
     <Compile Include="Extensions\BootExtensions.cs" />
     <Compile Include="Factory\ITenantConfiguration.cs" />
