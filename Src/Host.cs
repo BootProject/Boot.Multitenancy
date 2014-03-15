@@ -7,6 +7,8 @@ using System.Linq;
 using Boot.Multitenancy.Extensions;
 using Con = Boot.Multitenancy.Configuration.ConnectionstringConfiguration;
 using Conf = Boot.Multitenancy;
+using System;
+using System.Text;
 
 namespace Boot.Multitenancy
 {
@@ -19,7 +21,7 @@ namespace Boot.Multitenancy
 
         private static readonly object Lock = new object();
         internal static IHost FactoryHost { get; private set; }
-        public static Dictionary<string, ITenant> Tenants { get; set; }
+        public static TenantCollection Tenants { get; set; }
 
 
         /// <summary>
@@ -38,7 +40,7 @@ namespace Boot.Multitenancy
         /// </summary>
         private Host()
         {
-            Tenants = new Dictionary<string, ITenant>();
+            Tenants = new TenantCollection();
         }
 
 
@@ -47,7 +49,12 @@ namespace Boot.Multitenancy
         /// </summary>
         public static void Init()
         {
-            CreateTenants();
+            bool noTenants = (Tenants != null);
+            bool useConfig = CreateEnvironment();
+
+            if (noTenants && useConfig)      //See if tenants already created.
+                CreateTenants();
+            
             Init(Tenants);
         }
 
@@ -56,21 +63,25 @@ namespace Boot.Multitenancy
         /// Intit configuration with a List of Tenants
         /// </summary>
         /// <param name="tenants"></param>
-        public static void Init(Dictionary<string, ITenant> tenants)
+        public static void Init(TenantCollection tenants)
         {
-            foreach (var tenant in tenants.ToList()) 
-            {
-                var _tenant = (Tenant)tenant.Value;
-                    _tenant.Configuration.SessionFactory = _tenant.CreateConfig();
+            (from tenant in tenants 
+              select tenant)
+                .ToList()
+                    .ForEach(t => {
 
-                if (_tenant.Configuration.HostValues == null)
-                    _tenant.Configuration.HostValues = new List<string>();
+                        var tenant = (Tenant)t.Value;
+                        tenant.Configuration.SessionFactory = tenant.CreateConfig();
 
-                if (_tenant.Configuration.Properties == null)
-                    _tenant.Configuration.Properties = new Dictionary<string, object>();
+                        if (tenant.Configuration.HostValues == null)
+                            tenant.Configuration.HostValues = new List<string>();
 
-                SessionFactoryHostContainer.Current.Add(_tenant);
-            }
+                        if (tenant.Configuration.Properties == null)
+                            tenant.Configuration.Properties = new Dictionary<string, object>();
+                            
+                        SessionFactoryHostContainer.Current.Add(tenant);
+
+                        });
         }
 
 
@@ -94,6 +105,17 @@ namespace Boot.Multitenancy
                 Tenants.Add(element.Name, tenant);
             }
         }
+
+
+        /// <summary>
+        /// Varaiable to check for setup.
+        /// </summary>
+        /// <returns></returns>
+        private static bool CreateEnvironment()
+        {
+            return Configuration.Persist;
+        }
+
 
 
         /// <summary>

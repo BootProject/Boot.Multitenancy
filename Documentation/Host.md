@@ -10,7 +10,7 @@ The Host is responsible for creating Tenants. Host is implemented as a Singleton
 
 
 ###Built in Tenant
->The second way is to create a dictionary of Tenants and persist these to Init(Dictionay<Key, ITenant>).
+>The second way is to create a dictionary of Tenants and persist these to Init(Dictionay<Key, ITenant>). [Create tenant collection from code](CreateTenant.md)
 
 ###Create your own Tenant
 >The third way is to write your own Tenant and provide them as a Dictionay<Key, YourClassNameOfYourTenant>.
