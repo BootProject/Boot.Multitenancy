@@ -27,8 +27,7 @@ namespace Boot.Web
                       "~/Themes/Boot/config.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap.css"));
 
             //bundles.Add(new StyleBundle("~/themes").Include(string.Format("~/Themes/{0}/theme.css", SessionFactoryHostContainer.Current.Theme())));
         }

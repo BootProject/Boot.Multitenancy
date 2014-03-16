@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Boot.Multitenancy.Factory
 {
-    public class TenantCollecionValidateException : Exception
+    public class TenantCollectionValidateException : Exception
     {
         public override string Message
         {
             get
             {
-                return "This collection contain more or than one equal value. Solution! - Remove one of the values";
+                return "This collection contains more or than one equal value. Solution! - Remove one of the values";
             }
         }
     }

@@ -18,6 +18,15 @@ namespace Boot.Web.Models
     {
 
         /// <summary>
+        /// Ctor
+        /// </summary>
+        public PageViewModel()
+        {
+            Session = SessionFactoryHostContainer.CurrentFactory.OpenSession();
+        }
+
+
+        /// <summary>
         /// The Page Title 
         /// </summary>
         public string Title { get; set; }
@@ -29,15 +38,10 @@ namespace Boot.Web.Models
         public ISession Session { get; set; }
 
 
-        public string Theme { get { return SessionFactoryHostContainer.Current.Theme(); } }
-
         /// <summary>
-        /// Ctor
+        /// The current Theme
         /// </summary>
-        public PageViewModel()
-        {
-            Session = SessionFactoryHostContainer.CurrentFactory.OpenSession();
-        }
+        public string Theme { get { return SessionFactoryHostContainer.Current.Theme(); } }
 
 
         /// <summary>

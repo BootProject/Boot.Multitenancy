@@ -41,7 +41,6 @@ namespace Boot.Multitenancy.Extensions
                     UriFormat.UriEscaped);
         }
 
-
         /// <summary>
         /// Extension. Reads the Theme value from Properies.
         /// </summary>
@@ -49,14 +48,25 @@ namespace Boot.Multitenancy.Extensions
         /// <returns></returns>
         public static string Theme(this SessionFactoryHostContainer factory)
         {
-            if (factory.TenantConfiguration == null)
-                return string.Empty;
-            if (string.IsNullOrEmpty(factory.TenantConfiguration.Properties["Theme"].ToString()))
-                return string.Empty;
-
-            return factory.TenantConfiguration.Properties["Theme"].ToString();
+            return factory.GetProperty("Theme");
         }
     
+
+        /// <summary>
+        /// Extension. Reads the Theme value from Properies.
+        /// </summary>
+        /// <param name="factory"></param>
+        /// <returns></returns>
+        public static string GetProperty(this SessionFactoryHostContainer factory, string property)
+        {
+            if (factory.TenantConfiguration == null)
+                return string.Empty;
+            if (string.IsNullOrEmpty(factory.TenantConfiguration.Properties[property].ToString()))
+                return string.Empty;
+
+            return factory.TenantConfiguration.Properties[property].ToString();
+        }
+
 
         /// <summary>
         /// Converts an Collection to a generic List<T>

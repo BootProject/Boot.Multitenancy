@@ -31,10 +31,11 @@ namespace Boot.Multitenancy.Factory
             var list = new List<string>();
             var unique = new List<string>();
             var collection = ((TenantCollection)this).Values.ToList();
-            collection.ForEach(t => { list.AddRange(t.Configuration.HostValues); });
+            collection.ForEach(t => { 
+                list.AddRange(t.Configuration.HostValues); });
             list.ForEach(t => {
                 if (unique.Contains(t))
-                    throw new TenantCollecionValidateException();
+                    throw new TenantCollectionValidateException();
                 unique.Add(t);
             });
         }

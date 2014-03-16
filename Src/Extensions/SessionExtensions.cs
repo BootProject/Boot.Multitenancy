@@ -35,7 +35,6 @@ namespace Boot.Multitenancy.Extensions
 
                 if (inLocalTransaction)
                     session.Transaction.Commit();
-
             }
             catch
             {
