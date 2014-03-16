@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Boot.Multitenancy.Factory
 {
+
     /// <summary>
     /// TenantCollection
     /// Contains a Collection of Tenants.

@@ -216,11 +216,20 @@
     <Content Include="Themes\Boot\config.js" />
     <Content Include="Themes\Boot\logo.png" />
     <Content Include="Themes\Boot\theme.css" />
+    <Content Include="Themes\Boot\theme.min.css">
+      <DependentUpon>theme.css</DependentUpon>
+    </Content>
     <Content Include="Themes\Dev\config.js" />
     <Content Include="Themes\Dev\theme.css" />
+    <Content Include="Themes\Dev\theme.min.css">
+      <DependentUpon>theme.css</DependentUpon>
+    </Content>
     <Content Include="Themes\Net\bg.jpg" />
     <Content Include="Themes\Net\config.js" />
     <Content Include="Themes\Net\theme.css" />
+    <Content Include="Themes\Net\theme.min.css">
+      <DependentUpon>theme.css</DependentUpon>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
