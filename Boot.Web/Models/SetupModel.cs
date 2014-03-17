@@ -5,11 +5,62 @@ using System.Collections.Generic;
 using Boot.Multitenancy.SessionManager;
 using Boot.Multitenancy.Extensions;
 using Boot.ModelFactory;
+using NHibernate;
+using Boot.Multitenancy.Intrastructure.Domain;
+using Boot.Multitenancy.Intrastructure;
+using FluentNHibernate.Automapping;
+using System.Reflection;
+using FluentNHibernate.Cfg;
+using Boot.Multitenancy.Configuration;
+
 
 namespace Boot.Web.Models
 {
+
+    /// <summary>
+    /// Model separation among domains.
+    /// This model ensure that only object that should be installed to this domain are added.
+    /// </summary>
     public class SetupModel
     {
+        ISession Session { get; set; }
+        public List<Type> Types { get; set; }
+
+
+        public SetupModel()
+        {
+            Session = SessionFactoryHostContainer.CurrentFactory.OpenSession();
+            GetInstalledTypes();
+        }
+
+
+        /// <summary>
+        /// Grab all installed types by Fluent
+        /// </summary>
+        /// <returns>A list of name of the types.</returns>
+        public void GetInstalledTypes()
+        {
+            Types = new List<Type>();
+
+            foreach (var assemblyName in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
+            {
+                var assembly = Assembly.Load(assemblyName);
+                foreach (var type in assembly.GetTypes())
+                {
+                    if (type.IsClass && (type.GetInterface("IEntity") != null) && (!type.IsAbstract)) { 
+                        Types.Add(type);
+                    }
+                }
+            }
+        }
+
+
+        private static bool IsEntity(Type t)
+        {
+            return typeof(IEntity).IsAssignableFrom(t);
+        }
+
+
         /// <summary>
         /// Setup some defaults
         /// </summary>

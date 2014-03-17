@@ -5,34 +5,24 @@ using System.Web;
 using Boot.Multitenancy;
 using Boot.Multitenancy.Factory;
 
+using System.Data.SqlServerCe;
+using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
+
 namespace Boot.Web
 {
     public static class BootConfig
     {
         public static void Init()
         {
-           var conf1 = new TenantConfiguration {
-                Key = "BootTestData",
-                DbType = DbType.MySql5,
-                HostValues = new List<string> { "localhost", "www.boot.se" },
-                Properties = new Dictionary<string, object> { {"Theme", "Boot"} },
-                Connectionstring = "Server=127.0.0.1;Port=3306;Database=BootTestData;Uid=boots;Pwd=boots;"
-            };
-           
-            var conf2 = new TenantConfiguration {
-                Key = "MyOtherDatabase",
-                DbType = DbType.MySql5,
-                HostValues = new List<string> { "localhost", "www.boot.se" },
-                Properties = new Dictionary<string, object> { { "Theme", "Boot" } },
-                Connectionstring = "Server=127.0.0.1;Port=3306;Database=BootTestData;Uid=boots;Pwd=boots;"
-            };
-
-            var tenants = new TenantCollection { 
-                new Tenant(conf1), 
-                new Tenant(conf2)
-            };
-
-            //Host.Init(tenants);
+            foreach (var tenant in Boot.Multitenancy.Host.ConfigCollection) 
+            {
+                var configuration = tenant.Value.Configuration;
+                var con = new MySqlConnection("Server=127.0.0.1;Port=3306;Uid=boots;Pwd=boots;");
+                con.Open();
+                new MySqlCommand("CREATE DATABASE IF NOT EXISTS " + configuration.Key + ";", con).ExecuteNonQuery();
+                con.Close();
+            }
             Host.Init();
         }
     }

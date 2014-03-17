@@ -23,8 +23,10 @@ namespace Boot.Multitenancy.Factory
         /// </summary>
         public ITenantConfiguration Configuration { get; set; }
 
+
         //Ctor can only be created internal.
         internal Tenant() { }
+
 
         /// <summary>
         /// Init a new Tenant with ITenantConfiguration.
@@ -39,15 +41,26 @@ namespace Boot.Multitenancy.Factory
         /// <summary>
         /// Creates the ISessionFactory configuration.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>ISessionFactory of current configuation.</returns>
         public ISessionFactory CreateConfig()
         {
-            return Fluently
-                .Configure()
-                .Database(DatabaseConfiguration)
-                .Mappings(MapAssemblies)
-                .ExposeConfiguration(BuildSchema)
+            return FluentConfiguration
                 .BuildSessionFactory();
+        }
+
+
+        /// <summary>
+        /// The current FluentConfiguration
+        /// </summary>
+        public FluentConfiguration FluentConfiguration
+        {
+            get{
+                return Fluently
+                  .Configure()
+                  .Database(DatabaseConfiguration)
+                  .Mappings(MapAssemblies)
+                  .ExposeConfiguration(BuildSchema);
+            }
         }
 
 

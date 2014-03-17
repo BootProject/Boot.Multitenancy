@@ -64,3 +64,4 @@ E:\Bitbucket\Boot.Multitenancy\Boot.Web\bin\Microsoft.Owin.Security.MicrosoftAcc
 E:\Bitbucket\Boot.Multitenancy\Boot.Web\obj\Release\Boot.Web.csprojResolveAssemblyReference.cache
 E:\Bitbucket\Boot.Multitenancy\Boot.Web\obj\Release\Boot.Web.dll
 E:\Bitbucket\Boot.Multitenancy\Boot.Web\obj\Release\Boot.Web.pdb
+E:\Bitbucket\Boot.Multitenancy\Boot.Web\bin\System.Data.SqlServerCe.dll

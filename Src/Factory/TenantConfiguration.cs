@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentNHibernate.Cfg;
+using System;
 using System.Collections.Generic;
 
 namespace Boot.Multitenancy.Factory

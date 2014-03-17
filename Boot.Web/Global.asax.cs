@@ -16,6 +16,10 @@ namespace Boot.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            ViewEngines.Engines.Clear();
+            IViewEngine engine = new RazorViewEngine() { FileExtensions = new string[]{"cshtml"} };
+            ViewEngines.Engines.Add(engine);
         }
     }
 }

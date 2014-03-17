@@ -31,20 +31,15 @@ namespace Boot.Web.Mvc.Html
 
                 foreach (var item in contents) //MySql saves enum as string... strange!!
                 {
-                    if (item.Zone.ToString() == zone.ToString())
-                    {
+                    if (item.Zone.ToString() == zone.ToString()) {
                         sb.Append(RenderWidget(html, "~/Views/Widgets/Content.cshtml", item));
                     }
                 }
 
                 if (sb.ToString().Length > 0)
                     return new HtmlString(sb.ToString());
-
-
             }
-            catch (Exception ex)
-            {
-               
+            catch (Exception ex){
             }
 
             return new HtmlString("&nbsp;");

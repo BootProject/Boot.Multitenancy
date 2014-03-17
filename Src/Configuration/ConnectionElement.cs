@@ -9,7 +9,6 @@ namespace Boot.Multitenancy.Configuration
     /// <summary>
     /// Configuration element
     /// </summary>
-    [Obsolete("Not implemented, and probably will not be. Leave out for now.")]
     public class ConnectionElement
     {
 
@@ -24,5 +23,6 @@ namespace Boot.Multitenancy.Configuration
         public string Connectionstring { get; set; }
         public DbType DbType { get; set; }
         public string Theme { get; set; }
+        public List<string> DomainList { get; set; }
     }
 }

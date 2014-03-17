@@ -1,0 +1,159 @@
+﻿@model Boot.Web.ViewModels.SetupViewModel
+@{Layout = null;}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Setup</title>
+    <link rel="stylesheet" type="text/css" href="/Content/Bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/Setup.css" />
+    <script type="text/javascript" src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/Scripts/bootstrap.js"></script>
+</head>
+<body>
+
+
+    @using (Html.BeginForm("index", "Setup", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.ValidationSummary(true)
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-8">
+                    <h1>WebSite setup</h1>
+                    <p>Welcome to the site setup. By default we setup one page and site setting for you. It's important that you create the database correct, because you must change this manually if something is wrong. Note! The Settings table is required.</p>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#home" data-toggle="tab">Website settings</a></li>
+                        <li><a href="#database" data-toggle="tab">Database</a></li>
+                        <li><a href="#profile" data-toggle="tab">Tables</a></li>
+                        <li><a href="#dns" data-toggle="tab">Host header values</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="home">
+                            <div class="input-group">
+                                <span class="input-group-addon">Site name</span>
+                                @Html.TextBoxFor(m => m.SiteName, new { @class = "form-control", placeholder = "Your website name." })
+                                @Html.ValidationMessageFor(m => m.SiteName)
+                            </div>
+                            <br />
+                            <div class="input-group">
+                                <span class="input-group-addon">Footer</span>
+                                @Html.TextBoxFor(m => m.FooterText, new { @class = "form-control", placeholder = "Footer text." })
+                                @Html.ValidationMessageFor(m => m.FooterText)
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="profile">
+                            <div class="form-group">
+                                <span>Select tables to install</span>
+                                @Html.ListBoxFor(model => model.EntityNames,
+                                    new SelectList(Model.GetTypes, "FullName", "Name"), new { multiple = "multiple", rows = 10, style = "width:200px", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="database">
+
+                            <div class="input-group">
+                                <span class="input-group-addon">Select database type</span>
+                                @Html.DropDownListFor(model => model.SelectedType, new SelectList(Model.DbTypes, "", ""), new { @class = "form-control" })
+                            </div>
+                            <br />
+
+                            <div class="input-group">
+                                <span class="input-group-addon">Connectionstring</span>
+                                @Html.TextBoxFor(m => m.Connectionstring, new { @class = "form-control", placeholder = "For eg. Mysql: Server=127.0.0.1;Port=3306;Database=BootTestData;Uid=boots;Pwd=boots;" })
+                                @Html.ValidationMessageFor(m => m.Connectionstring)
+                            </div>
+                            <br/>
+                            <div class="input-group">
+                                <span class="input-group-addon">Database name</span>
+                                <input type="text" name="DatabaseName" class="form-control" placeholder="Enter database name" />
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="dns">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="hostval" placeholder="Type in a hostname, for eg. www.boot.com">
+                                <br />
+                                <select size="10" class="form-control" id="HostValues"></select>
+                                <br />
+                                <button type="button" id="btnAdd" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-plus-sign"></span> Add
+                                </button>&nbsp;
+                                <button type="button" id="btnRemove" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-minus-sign"></span> Remove
+                                </button>
+                            </div>
+                        </div>
+                        <br/>
+
+                        <button type="button" id="btnSave" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-arrow-right"></span> Save
+                        </button>
+                    </div>
+                    <div class="col-lg-2"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+
+            $('#hostval').focus(function () {
+                $(document).keydown(function (event) {
+                    if (event.which === 13) {
+                        $("#btnAdd").trigger("click");
+                    }
+                });
+            });
+
+
+
+
+            
+
+            $("#btnAdd").click(function () {
+                var dns = $("#hostval").val();
+                if (dns == '')
+                    return;
+                var has = false;
+                $("#HostValues").each(function () {
+                    if ($(this).val() == dns) {
+                        has = true;
+                    }
+                });
+                if (has == false) {
+                    $('#HostValues').prepend(new Option(dns, dns, true, true));
+                    $("#hostval").val('');
+                    has = false;
+                }
+            });
+
+            $("#btnRemove").click(function () {
+                var dns = $("#HostValues").val()
+                if (dns == '')
+                    return;
+                $('#HostValues option').each(function () {
+                    if ($(this).val() == dns) {
+                        $(this).remove();
+                    }
+                });
+            });
+
+            $("#HostValues").click(function () {
+                $("#hostval").val($(this).val());
+            });
+        </script>
+    }
+
+    @Scripts.Render("~/bundles/jqueryval")
+</body>
+
+
+
+
+
+
+
+</html>

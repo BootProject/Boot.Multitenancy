@@ -1,7 +1,10 @@
 Boot.MultiTenancy
 
-The typical structure resembles as follows:
+Contains Boot.Multitenancy core, a Model test and a web project.
+
+The typical structure resembles as follow:
 
 - Boot.Multitenancy, Core 
  -- Boot-ModelFactory, Models separated in it's own dll to avoid problems with references later.
- -- Boot.Web, A test web mvc 4.5.1 project.
+ -- Boot.Web, A test web mvc 4.5.1 project. Including a custom ViewPage<T> with additional helper included.
+    These helpers makes it possible to use for eg. @Zone(Region.Content) without wrapping it with @Html.

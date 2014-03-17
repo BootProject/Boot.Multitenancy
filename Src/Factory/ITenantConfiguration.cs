@@ -1,4 +1,5 @@
-﻿using NHibernate;
+﻿using FluentNHibernate.Cfg;
+using NHibernate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,5 +47,6 @@ namespace Boot.Multitenancy.Factory
         /// A ditionary of properties. Delimiter '|' Eg. Key,Value|Key,Value
         /// </summary>
         Dictionary<string, object> Properties { get; set; }
+
     }
 }

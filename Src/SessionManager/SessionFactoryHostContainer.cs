@@ -3,6 +3,7 @@ using NHibernate;
 using System;
 using System.Collections.Generic;
 using Boot.Multitenancy.Extensions;
+using FluentNHibernate.Cfg;
 
 namespace Boot.Multitenancy.SessionManager
 {
@@ -32,6 +33,9 @@ namespace Boot.Multitenancy.SessionManager
         }
 
 
+        private static Dictionary<string, ITenantConfiguration> _cache 
+            = new Dictionary<string,ITenantConfiguration>();
+
         /// <summary>
         /// Get Current TenantConfiguration
         /// </summary>
@@ -39,18 +43,29 @@ namespace Boot.Multitenancy.SessionManager
         {
             get
             {
-                foreach (var item in Current.SessionFactories.Values)
-                {
-                    var tenant = (Tenant)item;
-                    var hostValues = tenant.Configuration.HostValues;
-                    foreach (var val in hostValues)
+                var domain = S.Get.GetDomain();
+                if (!_cache.ContainsKey(domain)) 
+                { 
+                    foreach (var item in Current.SessionFactories.Values)
                     {
-                        if (val.Equals(string.Empty.GetDomain()))
-                            return tenant.Configuration;
+                        var tenant = (Tenant)item;
+                        var hostValues = tenant.Configuration.HostValues;
+                        foreach (var val in hostValues)
+                        {
+                            if (val.Equals(domain)) { 
+                                if(!_cache.ContainsKey(domain))
+                                _cache.Add(domain, tenant.Configuration);
+                            }
+                        }
                     }
                 }
-                return null;
+                return _cache[domain];
             }
+        }
+
+        struct S
+        {
+            public static string Get;
         }
 
 
@@ -61,8 +76,8 @@ namespace Boot.Multitenancy.SessionManager
         /// <returns>ISessionFactoryHostContainer</returns>
         internal SessionFactoryHostContainer Add(Tenant tenant)
         {
-            if (tenant.Equals(null))
-                throw new Exception("Tenant provided is null.");
+            if (tenant.Configuration.Equals(null))
+                throw new Exception("Tenant configuration cannot be null.");
 
             if (Current.SessionFactories.ContainsKey(tenant.Configuration.Key).Equals(false)) {
                 Current.SessionFactories.Add(tenant.Configuration.Key, tenant);

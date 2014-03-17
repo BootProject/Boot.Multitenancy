@@ -118,6 +118,33 @@ namespace Boot.Multitenancy
         }
 
 
+        /// <summary>
+        /// Reads out configuration before creating FluentConfiguration.
+        /// Does not affect the created collection.
+        /// </summary>
+        /// <returns>A list of ConnectionElement</returns>
+        public static TenantCollection ConfigCollection
+        {
+            get{
+                var tenants = new TenantCollection();
+                foreach (var element in Databases)
+                {
+                    var conf = new TenantConfiguration
+                    {
+                        Key = element.Name,
+                        DbType = element.DbType,
+                        HostValues = element.DomainList,
+                        Properties = element.PropertyList,
+                        Connectionstring = element.Connectionstring
+                    };
+
+                    var tenant = new Tenant(conf);
+                    tenants.Add(element.Name, tenant);
+                }
+                return tenants;
+            }
+        }
+
 
         /// <summary>
         /// A set of databases listed from web.config
@@ -126,7 +153,6 @@ namespace Boot.Multitenancy
         {
             get { return ConvertToList(Collection); }
         }
-
 
 
         /// <summary>
@@ -138,7 +164,6 @@ namespace Boot.Multitenancy
         {
             return Collection.CollectionToList<DatabaseSection>();
         }
-
 
 
         /// <summary>
