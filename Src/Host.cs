@@ -20,8 +20,8 @@ namespace Boot.Multitenancy
     {
 
         private static readonly object Lock = new object();
-        internal static IHost FactoryHost { get; private set; }
-        public static TenantCollection Tenants { get; set; }
+        public static Host FactoryHost { get; private set; }
+        internal TenantCollection Tenants { get; set; }
 
 
         /// <summary>
@@ -49,13 +49,13 @@ namespace Boot.Multitenancy
         /// </summary>
         public static void Init()
         {
-            bool noTenants = (Tenants != null);
+            bool noTenants = (FactoryHost.Tenants != null);
             bool useConfig = CreateEnvironment();
 
-            if (noTenants && useConfig)      //See if tenants already created.
+            if (noTenants && useConfig) //See if tenants already created.
                 CreateTenants();
-            
-            Init(Tenants);
+
+            Init(FactoryHost.Tenants);
         }
 
 
@@ -65,13 +65,13 @@ namespace Boot.Multitenancy
         /// <param name="tenants">TenantCollection to add</param>
         public static void Init(TenantCollection tenants)
         {
-            tenants.Validate();
+            FactoryHost.Tenants = tenants;
+            FactoryHost.Tenants.Validate();
 
-            (from tenant in tenants 
+            (from tenant in FactoryHost.Tenants 
               select tenant)
                 .ToList()
-                    .ForEach(t => 
-                    {
+                    .ForEach(t =>  {
                         var tenant = (Tenant)t.Value;
                         tenant.Configuration.SessionFactory = tenant.CreateConfig();
 
@@ -82,7 +82,7 @@ namespace Boot.Multitenancy
                             tenant.Configuration.Properties = new Dictionary<string, object>();
                             
                         SessionFactoryHostContainer.Current.Add(tenant);
-                     });
+                    });
         }
 
 
@@ -102,19 +102,9 @@ namespace Boot.Multitenancy
                     Connectionstring = element.Connectionstring
                 };
 
-                var tenant = new Tenant(conf);
-                Tenants.Add(element.Name, tenant);
+                var tenant = new Tenant() { Configuration = conf };
+                FactoryHost.Tenants.Add(element.Name, tenant);
             }
-        }
-
-
-        /// <summary>
-        /// Varaiable to check for setup.
-        /// </summary>
-        /// <returns></returns>
-        private static bool CreateEnvironment()
-        {
-            return Configuration.Persist;
         }
 
 
@@ -138,11 +128,21 @@ namespace Boot.Multitenancy
                         Connectionstring = element.Connectionstring
                     };
 
-                    var tenant = new Tenant(conf);
+                    var tenant = new Tenant() { Configuration = conf };
                     tenants.Add(element.Name, tenant);
                 }
                 return tenants;
             }
+        }
+
+
+        /// <summary>
+        /// Varaiable to check for setup.
+        /// </summary>
+        /// <returns></returns>
+        private static bool CreateEnvironment()
+        {
+            return Configuration.Persist;
         }
 
 

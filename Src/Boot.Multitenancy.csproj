@@ -76,6 +76,7 @@
     <Compile Include="Intrastructure\Enumerations.cs" />
     <Compile Include="Intrastructure\Domain\IEntity.cs" />
     <Compile Include="Intrastructure\StringColumnLengthConvention.cs" />
+    <Compile Include="MultiHost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Factory\Tenant.cs" />
     <Compile Include="Proxy\ProxyInterceptor.cs" />

@@ -62,7 +62,7 @@ namespace Boot.Web.Models
 
 
         /// <summary>
-        /// Setup some defaults
+        /// Setup some default pages and contents.
         /// </summary>
         public void CreateIfNotExist()
         {

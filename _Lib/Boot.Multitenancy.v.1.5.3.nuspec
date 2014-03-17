@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>Boot.Multitenancy</id>
-    <version>1.5.2</version>
+    <version>1.5.3</version>
     <authors>Rickard Magnusson</authors>
     <owners>Boot Project</owners>
     <licenseUrl>https://bitbucket.org/rickardmagnusson/bootproject</licenseUrl>
     <projectUrl>http://www.bitbucket.org/rickardmagnusson/Boot.MultiTenancy</projectUrl>
     <iconUrl>https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2014/Feb/22/bootproject-logo-112600298-1_avatar.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Boot.Multitenancy v1.5.0</description>
+    <description>Boot.Multitenancy v1.5.3</description>
     <releaseNotes>Boot.Multitenancy handles multiple NHibernate ISessions.</releaseNotes>
     <copyright>Copyright Boot Project 2014</copyright>
     <tags>NhIbernate, ISession, FluentNHibernate, Boot Project</tags>
